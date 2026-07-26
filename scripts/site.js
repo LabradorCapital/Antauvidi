@@ -273,8 +273,9 @@
     lineHero.style.setProperty('--line-photo-fallback', line.bg);
 
     // The solid brand field stays visible if the photograph is unavailable.
+    // Do not assume the photograph is missing while it loads — flagging it up
+    // front made the wash panel snap from full width to 48% on first visit.
     linePhoto.style.backgroundImage = '';
-    lineHero.classList.add('is-nophoto');
     withImage(line.photo, function (ok) {
       if (currentLine !== line) return;
       lineHero.classList.toggle('is-nophoto', !ok);
@@ -324,6 +325,9 @@
     if (!currentLine) return;
     selectLine(currentLine.key);
     setStep(1);
+    // The design snaps to the top of the home view before easing down to the
+    // cotizador, so the 420ms animation always runs downward from 0.
+    window.scrollTo(0, 0);
     // Always arrives from a line route, so this triggers a hashchange.
     window.location.hash = 'cotizador';
   }
@@ -336,7 +340,13 @@
   var heroPhoto = $('#hero-photo');
 
   // Degrade to the design's `heroTreatment: solido` variant.
-  var heroFallback = function () { document.documentElement.dataset.hero = 'solido'; };
+  // 'fallback', not 'solido': the design's authored solid variant keeps the
+  // full hero height and carries no watermark.
+  var heroFallback = function () {
+    if (!document.documentElement.dataset.hero) {
+      document.documentElement.dataset.hero = 'fallback';
+    }
+  };
   heroPhoto.addEventListener('error', heroFallback);
   if (heroPhoto.complete && heroPhoto.naturalWidth === 0) heroFallback();
 
@@ -502,16 +512,6 @@
     selectedLine = '';
     setStep(0);
     scrollToId('cotizador');
-  });
-
-  $$('.ds-input, .ds-select select', quoteForm).forEach(function (input) {
-    input.addEventListener('input', function () {
-      var f = input.closest('.ds-field');
-      if (!f || !f.classList.contains('is-error')) return;
-      f.classList.remove('is-error');
-      $('.ds-field__msg', f).textContent = '';
-      input.removeAttribute('aria-invalid');
-    });
   });
 
   /* ---- Cotizador — simple ----------------------------------------------- */

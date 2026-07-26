@@ -76,6 +76,11 @@ img { max-width: 100%; }
 
 .eyebrow--onArena { color: var(--azul-marino); opacity: 0.6; }
 
+/* An eyebrow sitting directly in a plain section — "Qué cubre" on the line
+   pages — matches none of the scoped rules further down, so it needs the
+   design's 14px here. */
+.section > .eyebrow { margin-bottom: 14px; }
+
 .section-title {
   font-family: var(--font-serif);
   font-weight: 400;
@@ -86,7 +91,7 @@ img { max-width: 100%; }
   margin: 0;
 }
 
-.section-title--sm { font-size: clamp(26px, 3.2vw, 42px); }
+.section-title--sm { font-size: clamp(26px, 3.2vw, 42px); letter-spacing: normal; }
 
 .btn {
   display: inline-flex;
@@ -107,34 +112,47 @@ img { max-width: 100%; }
 .btn--sm { font-size: 13px; padding: 15px 22px; }
 .btn--md { font-size: 13px; padding: 17px 26px; }
 
-.btn--coral { color: #ffffff; background: var(--coral); }
-.btn--coral:hover { background: var(--coral-600); }
+/* The design gives the cotizador's primary action 26px of horizontal padding
+   and its secondary actions 22px, so the coral button reads wider than
+   "Atrás" beside it. In this card the small coral button is always the
+   primary. */
+.btn--sm.btn--coral { padding: 15px 26px; }
 
-.btn--sky { color: var(--azul-marino); background: var(--azul-cielo); }
+/* Every :hover below repeats its own colour on purpose. Several of these
+   buttons are anchors, and the global `a:hover` at (0,1,1) outranks a bare
+   `.btn--*` at (0,1,0) — without this the hero CTA's white label turns coral
+   on a coral background the moment the pointer touches it. */
+.btn--coral, .btn--coral:hover { color: #ffffff; }
+.btn--coral:hover { background: var(--coral-600); }
+.btn--coral { background: var(--coral); }
+
+.btn--sky, .btn--sky:hover { color: var(--azul-marino); }
+.btn--sky { background: var(--azul-cielo); }
 .btn--sky:hover { background: #ffffff; }
 
-.btn--navy { color: #ffffff; background: var(--azul-marino); }
+.btn--navy, .btn--navy:hover { color: #ffffff; }
+.btn--navy { background: var(--azul-marino); }
 .btn--navy:hover { background: var(--navy-800); }
 
 .btn--outline {
-  color: var(--azul-marino);
   background: transparent;
   border: 1px solid var(--color-border-default);
 }
+.btn--outline, .btn--outline:hover { color: var(--azul-marino); }
 .btn--outline:hover { background: var(--color-bg-subtle); }
 
 .btn--outline-strong {
-  color: var(--azul-marino);
   background: transparent;
   border: 1px solid var(--azul-marino);
 }
+.btn--outline-strong, .btn--outline-strong:hover { color: var(--azul-marino); }
 .btn--outline-strong:hover { background: var(--navy-50); }
 
 .btn--ghost-light {
-  color: #ffffff;
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.4);
 }
+.btn--ghost-light, .btn--ghost-light:hover { color: #ffffff; }
 .btn--ghost-light:hover { background: rgba(255, 255, 255, 0.08); }
 
 .btn--block { width: 100%; padding: 17px; }
@@ -240,7 +258,9 @@ html[data-motion="off"] [data-rv] {
   margin-left: auto;
   background: none;
   border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: var(--radius-sm);
+  /* The design's `button { border-radius: 999px !important }` beats the inline
+     radius-sm on this element, so it renders as a circle. */
+  border-radius: 999px;
   width: 44px;
   height: 44px;
   display: none;
@@ -326,15 +346,18 @@ html[data-motion="off"] [data-rv] {
 /* `heroTreatment: solido` — also the automatic fallback when the photograph
    is missing, so the hero degrades to a brand-correct solid field. */
 html[data-hero="solido"] .hero__photo,
-html[data-hero="solido"] .hero__wash { display: none; }
+html[data-hero="solido"] .hero__wash,
+html[data-hero="fallback"] .hero__photo,
+html[data-hero="fallback"] .hero__wash { display: none; }
 
-/* Without a photograph the full-bleed height leaves a large empty navy field
-   that reads as a failed image rather than a design choice. Tighten it and
-   carry the reversed logomark the manual uses over solid colour, so the solid
-   treatment looks deliberate. Both revert the moment a photograph exists. */
-html[data-hero="solido"] .hero { min-height: clamp(420px, 56vh, 560px); }
+/* Only for the missing-photograph fallback, never for the design's authored
+   `?hero=solido`, which keeps the full height and carries no decoration. A
+   failed image otherwise leaves a large empty navy field that reads as a
+   broken load; tightening it and adding the reversed logomark the manual uses
+   over solid colour makes it look deliberate. */
+html[data-hero="fallback"] .hero { min-height: clamp(420px, 56vh, 560px); }
 
-html[data-hero="solido"] .hero::after {
+html[data-hero="fallback"] .hero::after {
   content: '';
   position: absolute;
   z-index: 0;
@@ -349,7 +372,7 @@ html[data-hero="solido"] .hero::after {
 }
 
 @media (max-width: 860px) {
-  html[data-hero="solido"] .hero::after { display: none; }
+  html[data-hero="fallback"] .hero::after { display: none; }
 }
 
 .hero__inner {
@@ -397,6 +420,7 @@ html[data-hero="solido"] .hero::after {
 }
 
 .section--tight { padding-block: clamp(64px, 8vw, 110px); }
+.section--quote { padding-block: clamp(72px, 9vw, 124px); }
 
 .section-head {
   display: flex;
@@ -533,7 +557,14 @@ html[data-hero="solido"] .hero::after {
   text-align: center;
 }
 
-.quote__intro .eyebrow { display: block; margin-bottom: 14px; }
+/* Restates font and colour because `.quote__intro p` below is (0,1,1) and
+   would otherwise outrank `.eyebrow` (0,1,0) on this one kicker. */
+.quote__intro .eyebrow {
+  display: block;
+  margin: 0 0 14px;
+  font: 700 12px/1.4 var(--font-sans);
+  color: var(--coral);
+}
 
 .quote__intro p {
   font: 400 17px/1.6 var(--font-sans);
@@ -627,11 +658,8 @@ html[data-hero="solido"] .hero::after {
   color: var(--coral);
 }
 
-.pick[aria-pressed="true"] {
-  border-color: var(--azul-marino);
-  background: var(--navy-50);
-}
-
+/* The design marks the chosen card with the coral "Seleccionado" caption
+   alone; navy border and navy-50 fill belong to :hover only. */
 .pick[aria-pressed="true"] .pick__flag { display: block; }
 
 .field-grid {
@@ -687,6 +715,12 @@ html[data-hero="solido"] .hero::after {
 }
 
 .quote__done strong { color: var(--azul-marino); }
+
+/* The design wraps only the completo confirmation in max-width:520px, and its
+   paragraph's 26px margin exists to clear the "Cotizar otra línea" bar that
+   follows. Neither applies in simple mode. */
+#quote-simple-done { max-width: none; }
+#quote-simple-done p { margin: 0; }
 
 .quote__restart {
   border-top: 1px solid var(--color-border-subtle);
@@ -779,7 +813,7 @@ html[data-hero="solido"] .hero::after {
   margin: 0 0 8px;
 }
 
-.agentes__panel > p {
+#agentes-fields > p {
   font: 400 15px/1.6 var(--font-sans);
   color: var(--color-fg-muted);
   margin: 0 0 24px;
