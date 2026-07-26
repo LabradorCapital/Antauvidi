@@ -269,10 +269,11 @@
 
     // The solid brand field stays visible if the photograph is unavailable.
     linePhoto.style.backgroundImage = '';
+    lineHero.classList.add('is-nophoto');
     withImage(line.photo, function (ok) {
-      if (ok && currentLine === line) {
-        linePhoto.style.backgroundImage = 'url("' + line.photo + '")';
-      }
+      if (currentLine !== line) return;
+      lineHero.classList.toggle('is-nophoto', !ok);
+      if (ok) linePhoto.style.backgroundImage = 'url("' + line.photo + '")';
     });
 
     $('[data-bind="tag"]', lineEl).textContent = line.tag;

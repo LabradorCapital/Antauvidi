@@ -328,8 +328,33 @@ html[data-motion="off"] [data-rv] {
 html[data-hero="solido"] .hero__photo,
 html[data-hero="solido"] .hero__wash { display: none; }
 
+/* Without a photograph the full-bleed height leaves a large empty navy field
+   that reads as a failed image rather than a design choice. Tighten it and
+   carry the reversed logomark the manual uses over solid colour, so the solid
+   treatment looks deliberate. Both revert the moment a photograph exists. */
+html[data-hero="solido"] .hero { min-height: clamp(420px, 56vh, 560px); }
+
+html[data-hero="solido"] .hero::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  right: clamp(24px, 6vw, 104px);
+  transform: translateY(-50%);
+  width: clamp(200px, 26vw, 340px);
+  aspect-ratio: 1;
+  background: url('../assets/logomark-blanco.svg') no-repeat center / contain;
+  opacity: 0.07;
+  pointer-events: none;
+}
+
+@media (max-width: 860px) {
+  html[data-hero="solido"] .hero::after { display: none; }
+}
+
 .hero__inner {
   position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
@@ -841,6 +866,12 @@ html[data-hero="solido"] .hero__wash { display: none; }
   flex-direction: column;
   justify-content: center;
 }
+
+/* No photograph for this line: the wash covering only 48% of the column
+   leaves the rest as a bare colour block that looks like a broken image.
+   Take the whole column instead, so it reads as the manual's solid-colour
+   blocking. Set by scripts/site.js when the photo probe fails. */
+.line-hero.is-nophoto .line-hero__wash { inset: 0; }
 
 .line-hero__mark {
   position: absolute;
