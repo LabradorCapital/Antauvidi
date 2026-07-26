@@ -38,11 +38,21 @@ that `foto-2.jpeg` already carries. Using it would have put the same image on
 both the home hero and the Vida line.
 
 The client supplied an elderly couple on a beach for Vida instead, which reads
-better against "Tu legado, en manos firmes" and removes the duplication. It is
-cropped to 1000 × 1115 with the couple at roughly 70% horizontally, so they
-land in the clean half of the media column rather than behind the duotone
-wash — which is also why `scripts/site.js` gives Vida `pos: 'center'` instead
-of the design's `center 26%`.
+better against "Tu legado, en manos firmes" and removes the duplication.
+
+Framing it took two passes. The photograph is mirrored like Salud and Casa so
+the couple faces into the layout, and the CSS flip maps a position `p` to
+`1 - p`, so the crop has to compensate. It is now taken from x 212 at
+1200 × 1115, putting the couple at 44% in the file so the flip lands them at
+56% of the panel — straddling the wash edge at 48%. About a quarter of them
+sits under the translucent strip and the rest is clean, which is the same
+relationship every other line has: the photograph visibly continues across
+both halves rather than appearing to stop where the strip begins. An earlier
+crop placed them entirely at 70%, leaving only empty sea under the strip, so
+the panel read as two separate blocks.
+
+`scripts/site.js` therefore gives Vida `pos: 'center'` and
+`flip: 'scaleX(-1)'` rather than the design's `center 26%` / `none`.
 
 ### Available, not wired in
 
