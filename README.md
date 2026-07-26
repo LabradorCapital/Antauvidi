@@ -116,12 +116,12 @@ sync if the bundle changes.
 
 ## Known gaps
 
-- **Photography.** Two of the four brand photographs are in — `foto-2.jpeg`
-  (home hero and Casa) and `foto-1.jpeg` (Salud), supplied by the client and
-  verified against the originals. `foto-vida.jpeg` and `foto-auto.jpeg` are
-  still missing; neither could be read out of the design project, which caps
-  file reads at 256 KiB. The Vida and Auto heroes degrade to brand-correct
-  solid fields until they are added. See [`assets/README.md`](assets/README.md).
+- **Photography.** All four line photographs are in, supplied by the client —
+  none could be read out of the design project, which caps file reads at
+  256 KiB. Vida carries a deliberate substitution: the design project's
+  `foto-vida.jpeg` turns out to be a tighter crop of the same family picture
+  the home hero already uses, so an elderly-couple frame replaces it at the
+  client's direction. See [`assets/README.md`](assets/README.md).
 - **Fonts.** Same cap, same outcome for the Tinos `.ttf` binaries, so Tinos
   and Karla are both loaded from Google Fonts. See
   [`_ds/antauvidi-…/assets/fonts/README.md`](_ds/antauvidi-design-system-92f6524b-cf0b-497f-b75e-7816dc1ea0d9/assets/fonts/README.md).

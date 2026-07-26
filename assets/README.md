@@ -15,48 +15,47 @@ Imported from the Claude Design project **Sitio Antauvidi**
 
 ## Photography
 
-The design references four photographs. **Two are here, two are still
-missing.** None of them could be read out of the design project directly:
-every one exceeds the 256 KiB per-file cap of the design-project API and comes
-back truncated, and the formats rule out salvaging a low-resolution version —
-the JPEGs are baseline rather than progressive, and the PNGs are not
-Adam7-interlaced, so a truncated read returns only the top scanlines. Decoding
-what did arrive yielded 0.7%, 2.3%, 7.3% and 17.7% of each frame respectively.
+All four line photographs are in place. None of them could be read out of the
+design project directly — every one exceeds its 256 KiB per-file cap and comes
+back truncated, and the formats rule out salvaging a low-resolution version
+(the JPEGs are baseline rather than progressive, the PNGs are not
+Adam7-interlaced), so a truncated read returns only the top 0.7–17.7% of
+scanlines. They were supplied by the client instead.
 
-### Present
-
-Supplied directly by the client and verified against the recoverable top
-scanlines of the originals before being committed (mean per-pixel difference
-18.8 and 4.4 out of 255 — same photographs, downscaled).
-
-| File | Where it is used | Here | In the design project |
+| File | Where it is used | Here | Provenance |
 | --- | --- | --- | --- |
-| `foto-2.jpeg` | Home hero (full-bleed, `object-position: center 38%`) and the Casa line hero (`62% 72%`, mirrored) | JPEG 2000 × 1272, 410 KB | baseline JPEG 6492 × 4130 |
-| `foto-1.jpeg` | Salud line hero (`center 20%`, mirrored) | JPEG 2000 × 1188, 233 KB | baseline JPEG 5614 × 3335 |
+| `foto-2.jpeg` | Home hero (`center 38%`) and Casa line hero (`62% 72%`, mirrored) | 2000 × 1272 | Client. Verified against the original's recoverable scanlines: mean difference 4.4/255 |
+| `foto-1.jpeg` | Salud line hero (`center 20%`, mirrored) | 2000 × 1188 | Client. Verified the same way: 18.8/255 |
+| `foto-auto.jpeg` | Auto line hero (`center`) | 1225 × 1327 | Client, clean frame. Same photograph as the original 551 × 913, wider crop |
+| `foto-vida.jpeg` | Vida line hero (`center`) | 1000 × 1115 | **Different photograph, by client direction** — see below |
 
-2000 px wide is sized for a full-bleed hero; the originals are far larger than
-a web page needs.
+### Vida is a deliberate substitution
 
-### Still missing
+The `foto-vida.jpeg` in the design project is not a separate photograph at
+all: decoding its recoverable top scanlines shows the fingertips-forming-a-roof
+and the shelving behind them, i.e. a tighter crop of the same family picture
+that `foto-2.jpeg` already carries. Using it would have put the same image on
+both the home hero and the Vida line.
 
-| File | Where it is used | What the original is |
-| --- | --- | --- |
-| `foto-vida.jpeg` | Vida line hero (`center 26%`) | **PNG** despite the extension, 1400 × 1177 |
-| `foto-auto.jpeg` | Auto line hero (`center`) | **PNG** despite the extension, 551 × 913 |
+The client supplied an elderly couple on a beach for Vida instead, which reads
+better against "Tu legado, en manos firmes" and removes the duplication. It is
+cropped to 1000 × 1115 with the couple at roughly 70% horizontally, so they
+land in the clean half of the media column rather than behind the duotone
+wash — which is also why `scripts/site.js` gives Vida `pos: 'center'` instead
+of the design's `center 26%`.
 
-Drop them in beside this README under exactly those names — `.jpeg` extension
-included, even though both are really PNGs. The page references those literal
-names and browsers sniff the actual format, so it works either way. No code
-change is needed: each line hero probes its photograph and applies it if it
-loads.
+### Available, not wired in
 
-Until then the Vida and Auto heroes carry `.is-nophoto`, which spreads the
-duotone wash across the whole media column so the panel reads as the manual's
-solid-colour blocking rather than a failed image.
+| File | Notes |
+| --- | --- |
+| `foto-salud-alt.jpeg` | 2000 × 1121, doctor completing a form. The frame behind the Salud social post. Salud currently uses `foto-1.jpeg` (the medical team); swap the path in `scripts/site.js` to use this instead |
 
-Note on `foto-auto.jpeg`: at 551 × 913 the original is small for the
-full-bleed `background-size: cover` panel it fills, and will look soft on a
-desktop viewport. Worth sourcing a larger frame.
+## Share and icon artwork
+
+| File | Use |
+| --- | --- |
+| `og-cover.jpg` | 2000 × 761 — the social kit's cover artwork, with logotype, claim and URL chip already composed. Wired as `og:image` / `twitter:image` |
+| `apple-touch-icon.png` | 180 × 180 — coral logomark on Azul Marino. iOS ignores SVG favicons, so the home-screen icon needs this raster square |
 
 ## Rules
 

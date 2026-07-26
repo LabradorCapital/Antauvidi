@@ -23,7 +23,10 @@
       key: 'vida', name: 'Vida', tag: 'Seguros de vida',
       bg: 'var(--azul-marino)', fg: '#ffffff', dim: 'rgba(255,255,255,0.8)',
       eyebrow: 'var(--coral)', cta: 'var(--coral)', ctaFg: '#ffffff',
-      photo: 'assets/foto-vida.jpeg', pos: 'center 26%', wash: 'rgba(22,41,71,0.82)',
+      // Different photograph from the one the design assumed (elderly couple on a
+      // beach, per the client), reframed so the subjects clear the wash panel —
+      // so the design's 'center 26%' no longer applies.
+      photo: 'assets/foto-vida.jpeg', pos: 'center', wash: 'rgba(22,41,71,0.82)',
       flip: 'none',
       claim: 'Los tuyos, siempre respaldados.',
       claimSub: 'Antaŭvidi Vida. Lo que construiste sigue de pie.',
