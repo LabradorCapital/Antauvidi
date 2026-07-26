@@ -14,15 +14,18 @@
 <meta property="og:title" content="Antaŭvidi — La tranquilidad de estar listo.">
 <meta property="og:description" content="Respaldo en seguros de vida, salud, auto y casa. Prevenir, proteger, vivir tranquilo.">
 
-<!-- Design-system tokens, imported verbatim from the Claude Design project.
+<!-- Design-system tokens. Byte-identical copies of `_ds/…/tokens/*.css`, served
+     from `styles/tokens/` so the page never depends on an underscore-prefixed
+     path at runtime — those get dropped by Jekyll on GitHub Pages and by other
+     static hosts. Re-sync with `./sync-tokens.sh`.
      `tokens/fonts.css` is replaced by `styles/fonts.css` — see the note there. -->
 <link rel="stylesheet" href="styles/fonts.css">
-<link rel="stylesheet" href="_ds/antauvidi-design-system-92f6524b-cf0b-497f-b75e-7816dc1ea0d9/tokens/colors.css">
-<link rel="stylesheet" href="_ds/antauvidi-design-system-92f6524b-cf0b-497f-b75e-7816dc1ea0d9/tokens/typography.css">
-<link rel="stylesheet" href="_ds/antauvidi-design-system-92f6524b-cf0b-497f-b75e-7816dc1ea0d9/tokens/spacing.css">
-<link rel="stylesheet" href="_ds/antauvidi-design-system-92f6524b-cf0b-497f-b75e-7816dc1ea0d9/tokens/effects.css">
-<link rel="stylesheet" href="_ds/antauvidi-design-system-92f6524b-cf0b-497f-b75e-7816dc1ea0d9/tokens/dataviz.css">
-<link rel="stylesheet" href="_ds/antauvidi-design-system-92f6524b-cf0b-497f-b75e-7816dc1ea0d9/tokens/base.css">
+<link rel="stylesheet" href="styles/tokens/colors.css">
+<link rel="stylesheet" href="styles/tokens/typography.css">
+<link rel="stylesheet" href="styles/tokens/spacing.css">
+<link rel="stylesheet" href="styles/tokens/effects.css">
+<link rel="stylesheet" href="styles/tokens/dataviz.css">
+<link rel="stylesheet" href="styles/tokens/base.css">
 
 <link rel="stylesheet" href="styles/components.css">
 <link rel="stylesheet" href="styles/site.css">

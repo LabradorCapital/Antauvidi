@@ -1,0 +1,264 @@
+/* ============================================================================
+   Antaŭvidi — Color tokens
+   Three tiers: 1) primitives (brand hexes verbatim + derived ramps),
+   2) semantic roles (--color-*) — the ONLY tier components should consume,
+   3) legacy aliases (deprecated names kept live, remapped to tier 2).
+   Dark theme = re-map of tier 2 only, under [data-theme="dark"].
+   ========================================================================= */
+
+:root {
+  /* ==== TIER 1 — PRIMITIVES ============================================= */
+
+  /* Brand base colors (identity manual, hex verbatim) */
+  --azul-marino: #162947;   /* Pantone 2955 C — Seguros de Vida */
+  --azul-cielo:  #CBDEF2;   /* Pantone 2717 C — Gastos Médicos Mayores */
+  --coral:       #F04B54;   /* Pantone Red 032 C — Seguros Auto */
+  --arena:       #E8E2D7;   /* Pantone 7527 C — Seguros Casa */
+
+  /* Navy ramp — derived in oklch from --azul-marino (never invented) */
+  --navy-50:  oklch(from var(--azul-marino) 0.97 calc(c * 0.15) h);
+  --navy-100: oklch(from var(--azul-marino) 0.93 calc(c * 0.25) h);
+  --navy-200: oklch(from var(--azul-marino) 0.85 calc(c * 0.4) h);
+  --navy-300: oklch(from var(--azul-marino) 0.72 calc(c * 0.6) h);
+  --navy-400: oklch(from var(--azul-marino) 0.58 calc(c * 0.8) h);
+  --navy-500: oklch(from var(--azul-marino) 0.45 c h);
+  --navy-600: oklch(from var(--azul-marino) 0.36 c h);
+  --navy-700: var(--azul-marino);            /* ≈0.286 — the brand hex itself */
+  --navy-800: oklch(from var(--azul-marino) 0.23 c h);
+  --navy-900: oklch(from var(--azul-marino) 0.19 calc(c * 0.9) h);
+  --navy-950: oklch(from var(--azul-marino) 0.15 calc(c * 0.8) h);
+
+  /* Coral ramp */
+  --coral-100: oklch(from var(--coral) 0.94 calc(c * 0.18) h);
+  --coral-200: oklch(from var(--coral) 0.86 calc(c * 0.38) h);
+  --coral-300: oklch(from var(--coral) 0.76 calc(c * 0.65) h);
+  --coral-400: oklch(from var(--coral) 0.70 calc(c * 0.85) h);
+  --coral-500: var(--coral);                 /* ≈0.645 */
+  --coral-600: oklch(from var(--coral) 0.56 c h);
+  --coral-700: oklch(from var(--coral) 0.48 calc(c * 0.9) h);
+
+  /* Sky + arena tonal steps */
+  --sky-100: oklch(from var(--azul-cielo) 0.95 calc(c * 0.6) h);
+  --sky-300: var(--azul-cielo);
+  --sky-500: oklch(from var(--azul-cielo) 0.72 calc(c * 1.8) h);
+  --sky-700: oklch(from var(--azul-cielo) 0.55 calc(c * 2.2) h);
+  --arena-100: oklch(from var(--arena) 0.965 calc(c * 0.6) h);
+  --arena-300: var(--arena);
+  --arena-500: oklch(from var(--arena) 0.72 c h);
+  --arena-700: oklch(from var(--arena) 0.52 c h);
+
+  /* Neutral scale — near-zero chroma at navy hue 255 (unchanged values) */
+  --neutral-0:  #FFFFFF;
+  --neutral-10: oklch(0.98 0.003 255);
+  --neutral-20: oklch(0.94 0.004 255);
+  --neutral-30: oklch(0.88 0.006 255);
+  --neutral-40: oklch(0.76 0.008 255);
+  --neutral-50: oklch(0.62 0.010 255);
+  --neutral-60: oklch(0.48 0.012 255);
+  --neutral-70: oklch(0.36 0.014 255);
+  --neutral-80: oklch(0.26 0.016 255);  /* grafito */
+  --neutral-90: oklch(0.16 0.018 255);
+  --neutral-100:#000000;
+
+  /* Alpha scales — for scrims, hovers on photos, dark-mode borders */
+  --alpha-navy-5:  oklch(from var(--azul-marino) l c h / 0.05);
+  --alpha-navy-10: oklch(from var(--azul-marino) l c h / 0.10);
+  --alpha-navy-20: oklch(from var(--azul-marino) l c h / 0.20);
+  --alpha-navy-60: oklch(from var(--azul-marino) l c h / 0.60);
+  --alpha-white-10: oklch(1 0 0 / 0.10);
+  --alpha-white-20: oklch(1 0 0 / 0.20);
+  --alpha-white-70: oklch(1 0 0 / 0.70);
+
+  /* Status ramps — low-chroma so they don't compete with Coral.
+     Danger reuses the coral ramp (brand rule). */
+  --green-100: oklch(0.94 0.04 155);
+  --green-500: oklch(0.55 0.11 155);
+  --green-600: oklch(0.47 0.10 155);
+  --green-300: oklch(0.78 0.10 155);
+  --amber-100: oklch(0.95 0.06 80);
+  --amber-500: oklch(0.75 0.14 80);
+  --amber-700: oklch(0.55 0.12 70);
+  --amber-300: oklch(0.85 0.12 80);
+
+  /* Legacy tonal steps (kept — several components reference them) */
+  --azul-marino-10: oklch(from var(--azul-marino) calc(l + 0.55) c h);
+  --azul-marino-20: oklch(from var(--azul-marino) calc(l + 0.42) c h);
+  --azul-marino-40: oklch(from var(--azul-marino) calc(l + 0.22) c h);
+  --azul-marino-60: oklch(from var(--azul-marino) calc(l + 0.08) c h);
+  --azul-marino-80: var(--azul-marino);
+  --azul-marino-90: oklch(from var(--azul-marino) calc(l - 0.06) c h);
+  --coral-hover: oklch(from var(--coral) calc(l - 0.08) c h);
+  --coral-press: oklch(from var(--coral) calc(l - 0.14) c h);
+  --coral-tint:  oklch(from var(--coral) calc(l + 0.34) calc(c * 0.5) h);
+  --success: var(--green-500);
+  --warning: var(--amber-500);
+  --danger:  var(--coral);
+  --info:    var(--azul-marino-60);
+
+  /* ==== TIER 2 — SEMANTIC ROLES (consume these) ========================= */
+
+  /* Backgrounds */
+  --color-bg-page:            var(--neutral-0);
+  --color-bg-surface:         var(--neutral-0);
+  --color-bg-surface-raised:  var(--neutral-0);   /* + elevation shadow in light */
+  --color-bg-subtle:          var(--neutral-10);
+  --color-bg-muted:           var(--neutral-20);
+  --color-bg-inverse:         var(--azul-marino);
+  --color-bg-overlay:         var(--alpha-navy-60);
+  --color-bg-brand:           var(--azul-marino);
+  --color-bg-brand-subtle:    var(--navy-50);
+  --color-bg-accent:          var(--coral);
+  --color-bg-sky-tint:        var(--azul-cielo);
+  --color-bg-arena-tint:      var(--arena);
+  --color-bg-success:         var(--green-500);
+  --color-bg-success-subtle:  var(--green-100);
+  --color-bg-warning:         var(--amber-500);
+  --color-bg-warning-subtle:  var(--amber-100);
+  --color-bg-danger:          var(--coral);
+  --color-bg-danger-subtle:   var(--coral-100);
+  --color-bg-info:            var(--azul-marino-60);
+  --color-bg-info-subtle:     var(--navy-50);
+
+  /* Interaction states */
+  --color-bg-hover:           var(--alpha-navy-5);
+  --color-bg-active:          var(--alpha-navy-10);
+  --color-bg-selected:        var(--navy-50);
+  --color-bg-brand-hover:     var(--navy-800);
+  --color-bg-brand-active:    var(--navy-900);
+  --color-bg-accent-hover:    var(--coral-hover);
+  --color-bg-accent-active:   var(--coral-press);
+  --color-bg-disabled:        var(--neutral-20);
+
+  /* Foreground / text */
+  --color-fg-default:         var(--azul-marino);
+  --color-fg-muted:           var(--neutral-70);
+  --color-fg-subtle:          var(--neutral-50);
+  --color-fg-disabled:        var(--neutral-40);
+  --color-fg-on-solid:        var(--neutral-0);   /* on brand/accent/inverse fills */
+  --color-fg-brand:           var(--azul-marino);
+  --color-fg-accent:          var(--coral);
+  --color-fg-link:            var(--azul-marino);
+  --color-fg-link-hover:      var(--coral);
+  --color-fg-success:         var(--green-600);
+  --color-fg-warning:         var(--amber-700);
+  --color-fg-danger:          var(--coral-600);
+  --color-fg-info:            var(--navy-500);
+
+  /* Borders */
+  --color-border-subtle:      var(--neutral-30);
+  --color-border-default:     var(--neutral-40);
+  --color-border-strong:      var(--azul-marino);
+  --color-border-focus:       var(--coral);
+  --color-border-disabled:    var(--neutral-30);
+  --color-border-success:     var(--green-500);
+  --color-border-warning:     var(--amber-500);
+  --color-border-danger:      var(--coral);
+  --color-border-info:        var(--azul-marino-60);
+
+  /* Finance deltas (pair with ▲▼ glyphs — never color alone) */
+  --color-delta-gain:         var(--green-600);
+  --color-delta-loss:         var(--coral-600);
+  --color-delta-neutral:      var(--neutral-50);
+
+  /* ==== TIER 3 — LEGACY ALIASES (deprecated; do not use in new work) ==== */
+  --surface-page:      var(--color-bg-page);          /* @deprecated → --color-bg-page */
+  --surface-sunken:    var(--color-bg-subtle);        /* @deprecated → --color-bg-subtle */
+  --surface-card:      var(--color-bg-surface);       /* @deprecated → --color-bg-surface */
+  --surface-inverse:   var(--color-bg-inverse);       /* @deprecated → --color-bg-inverse */
+  --surface-brand-tint-sky:   var(--color-bg-sky-tint);   /* @deprecated */
+  --surface-brand-tint-arena: var(--color-bg-arena-tint); /* @deprecated */
+
+  --text-primary:    var(--color-fg-default);     /* @deprecated → --color-fg-default */
+  --text-secondary:  var(--color-fg-muted);       /* @deprecated → --color-fg-muted */
+  --text-tertiary:   var(--color-fg-subtle);      /* @deprecated → --color-fg-subtle */
+  --text-inverse:    var(--color-fg-on-solid);    /* @deprecated → --color-fg-on-solid */
+  --text-accent:     var(--color-fg-accent);      /* @deprecated → --color-fg-accent */
+  --text-link:       var(--color-fg-link);        /* @deprecated → --color-fg-link */
+  --text-link-hover: var(--color-fg-link-hover);  /* @deprecated → --color-fg-link-hover */
+
+  --border-subtle:  var(--color-border-subtle);   /* @deprecated → --color-border-subtle */
+  --border-default: var(--color-border-default);  /* @deprecated → --color-border-default */
+  --border-strong:  var(--color-border-strong);   /* @deprecated → --color-border-strong */
+  --border-focus:   var(--color-border-focus);    /* @deprecated → --color-border-focus */
+
+  --accent-primary:         var(--color-bg-brand);         /* @deprecated */
+  --accent-primary-hover:   var(--color-bg-brand-hover);   /* @deprecated */
+  --accent-primary-press:   var(--color-bg-brand-active);  /* @deprecated */
+  --accent-secondary:       var(--color-bg-accent);        /* @deprecated */
+  --accent-secondary-hover: var(--color-bg-accent-hover);  /* @deprecated */
+  --accent-secondary-press: var(--color-bg-accent-active); /* @deprecated */
+
+  /* Product-line color mapping, per manual (stable API — not deprecated) */
+  --line-vida:   var(--azul-marino);
+  --line-gmm:    var(--azul-cielo);
+  --line-auto:   var(--coral);
+  --line-casa:   var(--arena);
+
+  color-scheme: light;
+}
+
+/* ==== DARK THEME — remaps tier 2 only =================================== */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Backgrounds — deep navy, not black; raised = lighter step + border */
+  --color-bg-page:            var(--navy-950);
+  --color-bg-surface:         var(--navy-900);
+  --color-bg-surface-raised:  var(--navy-800);
+  --color-bg-subtle:          oklch(from var(--azul-marino) 0.17 calc(c * 0.85) h);
+  --color-bg-muted:           var(--navy-800);
+  --color-bg-inverse:         var(--neutral-10);
+  --color-bg-overlay:         oklch(0.05 0.02 255 / 0.70);
+  --color-bg-brand:           var(--sky-300);      /* navy fills invert to sky */
+  --color-bg-brand-subtle:    var(--navy-800);
+  --color-bg-accent:          var(--coral-400);    /* slightly lifted for contrast */
+  --color-bg-sky-tint:        var(--navy-800);
+  --color-bg-arena-tint:      oklch(from var(--arena) 0.25 calc(c * 0.5) h);
+  --color-bg-success:         var(--green-300);
+  --color-bg-success-subtle:  oklch(0.25 0.05 155);
+  --color-bg-warning:         var(--amber-300);
+  --color-bg-warning-subtle:  oklch(0.26 0.06 80);
+  --color-bg-danger:          var(--coral-400);
+  --color-bg-danger-subtle:   oklch(from var(--coral) 0.24 calc(c * 0.45) h);
+  --color-bg-info:            var(--sky-500);
+  --color-bg-info-subtle:     var(--navy-800);
+
+  --color-bg-hover:           var(--alpha-white-10);
+  --color-bg-active:          var(--alpha-white-20);
+  --color-bg-selected:        var(--navy-800);
+  --color-bg-brand-hover:     var(--sky-100);
+  --color-bg-brand-active:    oklch(from var(--azul-cielo) 0.99 calc(c * 0.4) h);
+  --color-bg-accent-hover:    var(--coral-300);
+  --color-bg-accent-active:   var(--coral-500);
+  --color-bg-disabled:        var(--navy-800);
+
+  /* Foreground */
+  --color-fg-default:         var(--neutral-10);
+  --color-fg-muted:           oklch(from var(--azul-cielo) 0.80 calc(c * 0.55) h);
+  --color-fg-subtle:          oklch(from var(--azul-cielo) 0.62 calc(c * 0.45) h);
+  --color-fg-disabled:        var(--navy-500);
+  --color-fg-on-solid:        var(--navy-900);     /* dark text on light fills */
+  --color-fg-brand:           var(--azul-cielo);
+  --color-fg-accent:          var(--coral-300);
+  --color-fg-link:            var(--azul-cielo);
+  --color-fg-link-hover:      var(--coral-300);
+  --color-fg-success:         var(--green-300);
+  --color-fg-warning:         var(--amber-300);
+  --color-fg-danger:          var(--coral-300);
+  --color-fg-info:            var(--sky-500);
+
+  /* Borders */
+  --color-border-subtle:      var(--alpha-white-10);
+  --color-border-default:     var(--alpha-white-20);
+  --color-border-strong:      var(--azul-cielo);
+  --color-border-focus:       var(--coral-300);
+  --color-border-disabled:    var(--alpha-white-10);
+  --color-border-success:     var(--green-300);
+  --color-border-warning:     var(--amber-300);
+  --color-border-danger:      var(--coral-300);
+  --color-border-info:        var(--sky-500);
+
+  --color-delta-gain:         var(--green-300);
+  --color-delta-loss:         var(--coral-300);
+  --color-delta-neutral:      oklch(from var(--azul-cielo) 0.62 calc(c * 0.45) h);
+}
