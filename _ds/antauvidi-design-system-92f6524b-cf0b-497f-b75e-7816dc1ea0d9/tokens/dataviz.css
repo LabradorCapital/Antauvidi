@@ -1,0 +1,65 @@
+:root {
+  /* ============================================================
+     Data-visualization palette — anchored to brand, colorblind-safe
+     sequence (vary lightness as well as hue; verified distinguishable
+     under deuteranopia/protanopia simulation).
+     Assign categorical colors in order; never skip. 7th+ series:
+     rethink the chart, don't invent an 8th hue.
+     ============================================================ */
+  --chart-1: var(--azul-marino);            /* navy — primary series */
+  --chart-2: var(--coral);                  /* coral — comparison series */
+  --chart-3: var(--sky-500);                /* strong sky blue */
+  --chart-4: oklch(0.60 0.09 180);          /* teal */
+  --chart-5: oklch(0.75 0.13 85);           /* amber */
+  --chart-6: oklch(0.50 0.11 310);          /* plum */
+
+  /* Sequential ramp — single-metric intensity (choropleths, heatmaps) */
+  --chart-seq-1: var(--navy-100);
+  --chart-seq-2: var(--navy-200);
+  --chart-seq-3: var(--navy-300);
+  --chart-seq-4: var(--navy-400);
+  --chart-seq-5: var(--navy-500);
+  --chart-seq-6: var(--navy-700);
+
+  /* Diverging ramp — deviation from a midpoint (loss ↔ gain) */
+  --chart-div-neg-2: var(--coral-500);
+  --chart-div-neg-1: var(--coral-300);
+  --chart-div-mid:   var(--neutral-20);
+  --chart-div-pos-1: var(--navy-300);
+  --chart-div-pos-2: var(--navy-600);
+
+  /* Chart furniture — recedes; data carries the ink */
+  --chart-grid: var(--neutral-20);
+  --chart-axis: var(--neutral-50);
+  --chart-label: var(--color-fg-muted);
+  --chart-annotation: var(--color-fg-subtle);
+
+  /* Finance semantics — always pair with ▲▼ glyphs or sign, never color alone.
+     Projected/estimated values: dashed stroke or hatched fill, labeled "proyectado". */
+  --delta-gain: var(--color-delta-gain);
+  --delta-loss: var(--color-delta-loss);
+  --delta-pending: var(--color-delta-neutral);
+}
+
+[data-theme="dark"] {
+  --chart-1: var(--azul-cielo);             /* navy unreadable on navy — invert to sky */
+  --chart-2: var(--coral-300);
+  --chart-3: var(--sky-500);
+  --chart-4: oklch(0.72 0.09 180);
+  --chart-5: oklch(0.80 0.12 85);
+  --chart-6: oklch(0.68 0.10 310);
+
+  --chart-seq-1: var(--navy-800);
+  --chart-seq-2: var(--navy-600);
+  --chart-seq-3: var(--navy-400);
+  --chart-seq-4: var(--navy-300);
+  --chart-seq-5: var(--sky-300);
+  --chart-seq-6: var(--sky-100);
+
+  --chart-div-mid: var(--navy-800);
+  --chart-div-pos-1: var(--sky-500);
+  --chart-div-pos-2: var(--sky-300);
+
+  --chart-grid: var(--alpha-white-10);
+  --chart-axis: oklch(from var(--azul-cielo) 0.62 calc(c * 0.45) h);
+}

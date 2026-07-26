@@ -1,0 +1,44 @@
+/* Tinos — official brand serif. Binaries provided in source pack. */
+@font-face {
+  font-family: 'Tinos';
+  src: url('../assets/fonts/Tinos-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Tinos';
+  src: url('../assets/fonts/Tinos-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Tinos';
+  src: url('../assets/fonts/Tinos-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Tinos';
+  src: url('../assets/fonts/Tinos-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Karla — official brand sans. No binaries were in the source pack (see readme
+   "Typography note"); loaded from Google Fonts as a flagged substitution. */
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,500;0,700;1,400;1,700&display=swap');
+
+/* Fira Sans — binaries were included in the source pack but the family is not
+   referenced anywhere in the identity manual. Declared here for completeness
+   only; NOT used by any token or component. See readme "Typography note". */
+@font-face {
+  font-family: 'Fira Sans (unused — flagged)';
+  src: url('../assets/fonts/FiraSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

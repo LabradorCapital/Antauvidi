@@ -1,0 +1,19 @@
+/* ============================================================================
+   Antaŭvidi — webfonts for the site build.
+
+   The design system declares Tinos via local .ttf binaries in
+   `_ds/.../assets/fonts/` and Karla from Google Fonts (see the design system
+   readme, "Typography note"). Those .ttf binaries could not be pulled out of
+   the Claude Design project — every one of them exceeds the 256 KiB read cap
+   and comes back truncated — so the site loads BOTH official families from
+   Google Fonts instead. Karla and Tinos are the same open-source families
+   Google Fonts distributes, so this is a same-family fetch, not a stand-in,
+   and it follows the rationale the design system already applies to Karla.
+
+   Consequence: `index.html` links the six other token files directly and
+   skips `_ds/.../tokens/fonts.css`, which would 404 on the missing binaries.
+   Drop the real Tinos files into `_ds/.../assets/fonts/` and this file can be
+   replaced by the design system's own `tokens/fonts.css`.
+   ========================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap');

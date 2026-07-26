@@ -1,0 +1,47 @@
+/* ============================================================
+   Antaŭvidi — base behaviors (imported last from styles.css)
+   Focus visibility, reduced motion, selection, numeric utilities.
+   ============================================================ */
+
+/* Single system-wide focus treatment — coral ring, offset, visible on any
+   surface. Only on :focus-visible (keyboard), never on mouse focus. */
+:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+  border-radius: var(--radius-sm);
+}
+
+/* Reduced motion — the brand is calm by default; honor the request fully. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+::selection {
+  background: var(--azul-cielo);
+  color: var(--azul-marino);
+}
+[data-theme="dark"] ::selection {
+  background: var(--sky-700);
+  color: var(--neutral-0);
+}
+
+/* Numeric utilities — amounts, IDs, table columns */
+.u-tabular { font-variant-numeric: tabular-nums; }
+.u-mono {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.9375em;
+  letter-spacing: 0.02em;
+}
+
+/* Base document affordances */
+body {
+  background: var(--color-bg-page);
+  color: var(--color-fg-default);
+}
+a { color: var(--color-fg-link); }
+a:hover { color: var(--color-fg-link-hover); }

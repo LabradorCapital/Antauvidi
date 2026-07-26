@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/antauvidi-design-system-92f6524b-cf0b-497f-b75e-7816dc1ea0d9/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/antauvidi-design-system-92f6524b-cf0b-497f-b75e-7816dc1ea0d9/tokens/colors.css">
+<link rel="stylesheet" href="_ds/antauvidi-design-system-92f6524b-cf0b-497f-b75e-7816dc1ea0d9/tokens/typography.css">
+<link rel="stylesheet" href="_ds/antauvidi-design-system-92f6524b-cf0b-497f-b75e-7816dc1ea0d9/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/antauvidi-design-system-92f6524b-cf0b-497f-b75e-7816dc1ea0d9/tokens/effects.css">
+<link rel="stylesheet" href="_ds/antauvidi-design-system-92f6524b-cf0b-497f-b75e-7816dc1ea0d9/tokens/dataviz.css">
+<link rel="stylesheet" href="_ds/antauvidi-design-system-92f6524b-cf0b-497f-b75e-7816dc1ea0d9/tokens/base.css">
+<link rel="stylesheet" href="_ds/antauvidi-design-system-92f6524b-cf0b-497f-b75e-7816dc1ea0d9/styles.css">
+<script src="_ds/antauvidi-design-system-92f6524b-cf0b-497f-b75e-7816dc1ea0d9/_ds_bundle.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--color-bg-page); color: var(--color-fg-default); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; text-wrap: pretty; }
+  a { color: var(--color-fg-link); text-decoration: none; }
+  a:hover { color: var(--color-fg-link-hover); }
+  button { border-radius: 999px !important; }
+  input, select, textarea { border-radius: 12px !important; }
+  @keyframes rv { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+  @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { [data-rv] { animation: none !important; opacity: 1 !important; transform: none !important; } }
+</style>
+</helmet>
+
+<header style="position:sticky;top:0;z-index:1100;background:var(--azul-marino)">
+  <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4vw,56px);height:68px;display:flex;align-items:center;gap:36px">
+    <img src="assets/logo-blanco.svg" alt="Antaŭvidi" onClick="{{ goHome }}" style="height:25px;width:auto;cursor:pointer;flex:none">
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;align-items:center;gap:28px;margin-left:auto">
+        <span onClick="{{ goVida }}" style="font:700 12px/1 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.8);cursor:pointer;transition:color 120ms" style-hover="color:#ffffff">Vida</span>
+        <span onClick="{{ goGmm }}" style="font:700 12px/1 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.8);cursor:pointer;transition:color 120ms" style-hover="color:#ffffff">Salud</span>
+        <span onClick="{{ goAuto }}" style="font:700 12px/1 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.8);cursor:pointer;transition:color 120ms" style-hover="color:#ffffff">Auto</span>
+        <span onClick="{{ goCasa }}" style="font:700 12px/1 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.8);cursor:pointer;transition:color 120ms" style-hover="color:#ffffff">Casa</span>
+        <span onClick="{{ scrollAgentes }}" style="font:700 12px/1 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.8);cursor:pointer;transition:color 120ms;padding-left:12px;border-left:1px solid rgba(255,255,255,0.2)" style-hover="color:#ffffff">Agentes</span>
+      </nav>
+    </sc-if>
+    <sc-if value="{{ isMobile }}">
+      <button type="button" onClick="{{ toggleMenu }}" aria-label="Menú" style="margin-left:auto;background:none;border:1px solid rgba(255,255,255,0.25);border-radius:var(--radius-sm);width:44px;height:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer">
+        <span style="display:block;width:18px;height:1.5px;background:#ffffff"></span>
+        <span style="display:block;width:18px;height:1.5px;background:#ffffff"></span>
+        <span style="display:block;width:18px;height:1.5px;background:#ffffff"></span>
+      </button>
+    </sc-if>
+  </div>
+</header>
+
+<sc-if value="{{ menuOpen }}">
+  <div style="position:fixed;inset:68px 0 0 0;z-index:1090;background:var(--azul-marino);padding:clamp(24px,6vw,40px);display:flex;flex-direction:column;gap:6px;animation:fadein 200ms both">
+    <span onClick="{{ goVida }}" style="font:400 30px/1.25 var(--font-serif);color:#ffffff;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.14);cursor:pointer">Vida</span>
+    <span onClick="{{ goGmm }}" style="font:400 30px/1.25 var(--font-serif);color:#ffffff;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.14);cursor:pointer">Salud</span>
+    <span onClick="{{ goAuto }}" style="font:400 30px/1.25 var(--font-serif);color:#ffffff;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.14);cursor:pointer">Auto</span>
+    <span onClick="{{ goCasa }}" style="font:400 30px/1.25 var(--font-serif);color:#ffffff;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.14);cursor:pointer">Casa</span>
+    <span onClick="{{ scrollAgentes }}" style="font:400 30px/1.25 var(--font-serif);color:#ffffff;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.14);cursor:pointer">Agentes</span>
+    <button type="button" onClick="{{ scrollQuote }}" style="margin-top:20px;font:700 13px/1 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:#ffffff;background:var(--coral);border:none;border-radius:var(--radius-sm);padding:18px;cursor:pointer">Solicitar cotización</button>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<main data-screen-label="Home">
+
+  <section style="position:relative;overflow:hidden;background:var(--azul-marino);min-height:clamp(540px,74vh,740px);display:flex;align-items:flex-end;border-radius:0 0 32px 32px">
+    <sc-if value="{{ heroFoto }}" hint-placeholder-val="{{ true }}">
+      <img src="assets/foto-2.jpeg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 38%">
+      <div style="position:absolute;inset:0;background:var(--duotone-navy)"></div>
+    </sc-if>
+    <div style="position:relative;width:100%;max-width:1280px;margin:0 auto;padding:clamp(64px,10vw,120px) clamp(20px,4vw,56px) clamp(48px,7vw,88px)">
+      <div style="font:700 12px/1.4 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:var(--coral);margin-bottom:20px">Respaldo para agentes y clientes</div>
+      <h1 style="font-family:var(--font-serif);font-weight:700;font-size:clamp(38px,6vw,74px);line-height:1.04;letter-spacing:-0.015em;color:#ffffff;margin:0;max-width:16em">La tranquilidad de estar listo.</h1>
+      <p style="font:400 clamp(17px,1.5vw,20px)/1.6 var(--font-sans);color:rgba(255,255,255,0.82);margin:24px 0 0;max-width:34em">Antaŭvidi respalda a agentes de seguros y a sus clientes con cuatro líneas de protección, criterio técnico y trato personal en cada trámite.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:36px">
+        <button type="button" onClick="{{ scrollQuote }}" style="font:700 14px/1 var(--font-sans);letter-spacing:0.06em;text-transform:uppercase;color:#ffffff;background:var(--coral);border:none;border-radius:var(--radius-sm);padding:18px 26px;cursor:pointer;transition:background 120ms" style-hover="background:var(--coral-600)">Solicitar cotización</button>
+        <button type="button" onClick="{{ scrollAgentes }}" style="font:700 14px/1 var(--font-sans);letter-spacing:0.06em;text-transform:uppercase;color:var(--azul-marino);background:var(--azul-cielo);border:none;border-radius:var(--radius-sm);padding:18px 26px;cursor:pointer;transition:background 120ms" style-hover="background:#ffffff">Quiero ser agente</button>
+      </div>
+    </div>
+  </section>
+
+  <section data-rv="" style="max-width:1280px;margin:0 auto;padding:clamp(72px,9vw,120px) clamp(20px,4vw,56px);animation:rv .7s cubic-bezier(0,0,.2,1) both;animation-timeline:view();animation-range:entry 0% entry 45%">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:clamp(32px,4vw,52px)">
+      <div>
+        <div style="font:700 12px/1.4 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:var(--coral);margin-bottom:14px">Cartera integral</div>
+        <h2 style="font-family:var(--font-serif);font-weight:400;font-size:clamp(28px,3.6vw,46px);line-height:1.15;letter-spacing:-0.01em;color:var(--azul-marino);margin:0;max-width:22em">Cuatro líneas, un mismo respaldo.</h2>
+      </div>
+      <p style="font:400 16px/1.6 var(--font-sans);color:var(--color-fg-muted);margin:0;max-width:26em">Cada línea opera con su propio equipo técnico. Un solo asesor te acompaña en todas.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px">
+      <div onClick="{{ goVida }}" style="background:var(--color-bg-surface);border:1px solid var(--color-border-subtle);border-radius:20px;padding:clamp(26px,2.6vw,36px);cursor:pointer;display:flex;flex-direction:column;min-height:300px;transition:border-color 160ms,box-shadow 160ms" style-hover="border-color:var(--azul-marino);box-shadow:var(--elevation-200)">
+        <span style="display:block;width:34px;height:3px;background:var(--azul-marino);margin-bottom:22px"></span>
+        <h3 style="font-family:var(--font-serif);font-weight:400;font-size:26px;line-height:1.2;color:var(--azul-marino);margin:0 0 12px">Vida</h3>
+        <p style="font:400 15px/1.6 var(--font-sans);color:var(--color-fg-muted);margin:0">El respaldo económico que sostiene a tu familia cuando tú ya no puedas hacerlo.</p>
+        <span style="margin-top:auto;padding-top:24px;font:700 12px/1 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:var(--coral)">Ver cobertura</span>
+      </div>
+      <div onClick="{{ goGmm }}" style="background:var(--color-bg-surface);border:1px solid var(--color-border-subtle);border-radius:20px;padding:clamp(26px,2.6vw,36px);cursor:pointer;display:flex;flex-direction:column;min-height:300px;transition:border-color 160ms,box-shadow 160ms" style-hover="border-color:var(--azul-marino);box-shadow:var(--elevation-200)">
+        <span style="display:block;width:34px;height:3px;background:var(--azul-cielo);margin-bottom:22px"></span>
+        <h3 style="font-family:var(--font-serif);font-weight:400;font-size:26px;line-height:1.2;color:var(--azul-marino);margin:0 0 12px">Salud</h3>
+        <p style="font:400 15px/1.6 var(--font-sans);color:var(--color-fg-muted);margin:0">Hospitalización, cirugía y tratamientos de alto costo, con red médica amplia.</p>
+        <span style="margin-top:auto;padding-top:24px;font:700 12px/1 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:var(--coral)">Ver cobertura</span>
+      </div>
+      <div onClick="{{ goAuto }}" style="background:var(--color-bg-surface);border:1px solid var(--color-border-subtle);border-radius:20px;padding:clamp(26px,2.6vw,36px);cursor:pointer;display:flex;flex-direction:column;min-height:300px;transition:border-color 160ms,box-shadow 160ms" style-hover="border-color:var(--azul-marino);box-shadow:var(--elevation-200)">
+        <span style="display:block;width:34px;height:3px;background:var(--coral);margin-bottom:22px"></span>
+        <h3 style="font-family:var(--font-serif);font-weight:400;font-size:26px;line-height:1.2;color:var(--azul-marino);margin:0 0 12px">Auto</h3>
+        <p style="font:400 15px/1.6 var(--font-sans);color:var(--color-fg-muted);margin:0">Asistencia vial, cobertura amplia y un proceso de siniestro que no te quita el día.</p>
+        <span style="margin-top:auto;padding-top:24px;font:700 12px/1 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:var(--coral)">Ver cobertura</span>
+      </div>
+      <div onClick="{{ goCasa }}" style="background:var(--color-bg-surface);border:1px solid var(--color-border-subtle);border-radius:20px;padding:clamp(26px,2.6vw,36px);cursor:pointer;display:flex;flex-direction:column;min-height:300px;transition:border-color 160ms,box-shadow 160ms" style-hover="border-color:var(--azul-marino);box-shadow:var(--elevation-200)">
+        <span style="display:block;width:34px;height:3px;background:var(--arena-500);margin-bottom:22px"></span>
+        <h3 style="font-family:var(--font-serif);font-weight:400;font-size:26px;line-height:1.2;color:var(--azul-marino);margin:0 0 12px">Casa</h3>
+        <p style="font:400 15px/1.6 var(--font-sans);color:var(--color-fg-muted);margin:0">Tu inmueble y su contenido, protegidos ante lo que no se puede prever.</p>
+        <span style="margin-top:auto;padding-top:24px;font:700 12px/1 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:var(--coral)">Ver cobertura</span>
+      </div>
+    </div>
+  </section>
+
+  <section data-rv="" style="background:var(--arena);border-radius:28px;margin:0 clamp(12px,2vw,24px);padding:clamp(72px,9vw,124px) 0;animation:rv .7s cubic-bezier(0,0,.2,1) both;animation-timeline:view();animation-range:entry 0% entry 45%">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+      <div style="font:700 12px/1.4 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:var(--azul-marino);opacity:0.6;margin-bottom:14px">Por qué Antaŭvidi</div>
+      <h2 style="font-family:var(--font-serif);font-weight:400;font-size:clamp(28px,3.6vw,46px);line-height:1.15;letter-spacing:-0.01em;color:var(--azul-marino);margin:0 0 clamp(40px,5vw,64px);max-width:24em">Tres cosas que no negociamos.</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(28px,4vw,56px)">
+        <div>
+          <div style="font-family:var(--font-serif);font-size:44px;line-height:1;color:var(--coral);margin-bottom:18px">01</div>
+          <h3 style="font:700 20px/1.3 var(--font-sans);color:var(--azul-marino);margin:0 0 12px">Trato personal</h3>
+          <p style="font:400 16px/1.65 var(--font-sans);color:var(--azul-marino);opacity:0.75;margin:0">Un asesor con nombre, no un conmutador. La misma persona te cotiza, te contrata y te acompaña el día del siniestro.</p>
+        </div>
+        <div>
+          <div style="font-family:var(--font-serif);font-size:44px;line-height:1;color:var(--coral);margin-bottom:18px">02</div>
+          <h3 style="font:700 20px/1.3 var(--font-sans);color:var(--azul-marino);margin:0 0 12px">Respaldo</h3>
+          <p style="font:400 16px/1.65 var(--font-sans);color:var(--azul-marino);opacity:0.75;margin:0">Años de oficio en el sector financiero detrás de cada póliza, con criterio técnico para elegir la cobertura correcta y no la más fácil de vender.</p>
+        </div>
+        <div>
+          <div style="font-family:var(--font-serif);font-size:44px;line-height:1;color:var(--coral);margin-bottom:18px">03</div>
+          <h3 style="font:700 20px/1.3 var(--font-sans);color:var(--azul-marino);margin:0 0 12px">Tecnología</h3>
+          <p style="font:400 16px/1.65 var(--font-sans);color:var(--azul-marino);opacity:0.75;margin:0">Cotización, emisión y seguimiento en una sola plataforma. Menos papel, menos espera y expediente disponible cuando lo necesitas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cotizador" data-rv="" style="max-width:1280px;margin:0 auto;padding:clamp(72px,9vw,124px) clamp(20px,4vw,56px);animation:rv .7s cubic-bezier(0,0,.2,1) both;animation-timeline:view();animation-range:entry 0% entry 45%">
+    <div style="max-width:760px;margin:0 auto clamp(36px,4vw,52px);text-align:center">
+      <div style="font:700 12px/1.4 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:var(--coral);margin-bottom:14px">Cotización</div>
+      <h2 style="font-family:var(--font-serif);font-weight:400;font-size:clamp(28px,3.6vw,46px);line-height:1.15;letter-spacing:-0.01em;color:var(--azul-marino);margin:0">Dinos qué quieres proteger.</h2>
+      <p style="font:400 17px/1.6 var(--font-sans);color:var(--color-fg-muted);margin:18px 0 0">Cuatro pasos breves. Un asesor revisa tu caso y te contacta con una propuesta a medida.</p>
+    </div>
+
+    <div style="max-width:900px;margin:0 auto;border:1px solid var(--color-border-subtle);border-radius:24px;box-shadow:var(--elevation-200);background:var(--color-bg-surface);overflow:hidden">
+      <sc-if value="{{ modeCompleto }}" hint-placeholder-val="{{ true }}">
+        <div style="padding:clamp(20px,3vw,28px) clamp(20px,3.5vw,40px);border-bottom:1px solid var(--color-border-subtle);background:var(--navy-50);overflow-x:auto">
+          <x-import component-from-global-scope="AntaVidiDesignSystem_92f652.Stepper" steps="{{ stepLabels }}" current="{{ step }}" on-step-click="{{ goStep }}" hint-size="100%,30px"></x-import>
+        </div>
+        <div style="padding:clamp(28px,4vw,48px)">
+
+          <sc-if value="{{ isStep0 }}" hint-placeholder-val="{{ true }}">
+            <h3 style="font:700 19px/1.4 var(--font-sans);color:var(--azul-marino);margin:0 0 22px">¿Qué quieres asegurar?</h3>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px">
+              <div onClick="{{ pick.vida }}" style="border:1px solid var(--color-border-subtle);border-radius:16px;padding:22px;cursor:pointer;transition:border-color 160ms,background 160ms" style-hover="border-color:var(--azul-marino);background:var(--navy-50)">
+                <span style="display:block;width:28px;height:3px;background:var(--azul-marino);margin-bottom:16px"></span>
+                <div style="font:700 16px/1.3 var(--font-sans);color:var(--azul-marino)">Vida</div>
+                <div style="font:400 13px/1.5 var(--font-sans);color:var(--color-fg-muted);margin-top:6px">Para tu familia</div>
+                <sc-if value="{{ sel.vida }}"><div style="margin-top:14px;font:700 11px/1 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:var(--coral)">Seleccionado</div></sc-if>
+              </div>
+              <div onClick="{{ pick.gmm }}" style="border:1px solid var(--color-border-subtle);border-radius:16px;padding:22px;cursor:pointer;transition:border-color 160ms,background 160ms" style-hover="border-color:var(--azul-marino);background:var(--navy-50)">
+                <span style="display:block;width:28px;height:3px;background:var(--azul-cielo);margin-bottom:16px"></span>
+                <div style="font:700 16px/1.3 var(--font-sans);color:var(--azul-marino)">Salud</div>
+                <div style="font:400 13px/1.5 var(--font-sans);color:var(--color-fg-muted);margin-top:6px">Hospital y cirugía</div>
+                <sc-if value="{{ sel.gmm }}"><div style="margin-top:14px;font:700 11px/1 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:var(--coral)">Seleccionado</div></sc-if>
+              </div>
+              <div onClick="{{ pick.auto }}" style="border:1px solid var(--color-border-subtle);border-radius:16px;padding:22px;cursor:pointer;transition:border-color 160ms,background 160ms" style-hover="border-color:var(--azul-marino);background:var(--navy-50)">
+                <span style="display:block;width:28px;height:3px;background:var(--coral);margin-bottom:16px"></span>
+                <div style="font:700 16px/1.3 var(--font-sans);color:var(--azul-marino)">Auto</div>
+                <div style="font:400 13px/1.5 var(--font-sans);color:var(--color-fg-muted);margin-top:6px">Tu vehículo</div>
+                <sc-if value="{{ sel.auto }}"><div style="margin-top:14px;font:700 11px/1 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:var(--coral)">Seleccionado</div></sc-if>
+              </div>
+              <div onClick="{{ pick.casa }}" style="border:1px solid var(--color-border-subtle);border-radius:16px;padding:22px;cursor:pointer;transition:border-color 160ms,background 160ms" style-hover="border-color:var(--azul-marino);background:var(--navy-50)">
+                <span style="display:block;width:28px;height:3px;background:var(--arena-500);margin-bottom:16px"></span>
+                <div style="font:700 16px/1.3 var(--font-sans);color:var(--azul-marino)">Casa</div>
+                <div style="font:400 13px/1.5 var(--font-sans);color:var(--color-fg-muted);margin-top:6px">Inmueble y contenido</div>
+                <sc-if value="{{ sel.casa }}"><div style="margin-top:14px;font:700 11px/1 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:var(--coral)">Seleccionado</div></sc-if>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isStep1 }}">
+            <div style="font:700 11px/1 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:var(--coral);margin-bottom:10px">{{ selName }}</div>
+            <h3 style="font:700 19px/1.4 var(--font-sans);color:var(--azul-marino);margin:0 0 22px">Cuéntanos lo básico.</h3>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px">
+              <x-import component-from-global-scope="AntaVidiDesignSystem_92f652.Input" label="{{ qLabel1 }}" placeholder="{{ qPh1 }}" value="{{ f1 }}" error="{{ err.f1 }}" on-change="{{ set.f1 }}" hint-size="100%,68px"></x-import>
+              <x-import component-from-global-scope="AntaVidiDesignSystem_92f652.Input" label="{{ qLabel2 }}" placeholder="{{ qPh2 }}" value="{{ f2 }}" error="{{ err.f2 }}" on-change="{{ set.f2 }}" hint-size="100%,68px"></x-import>
+              <x-import component-from-global-scope="AntaVidiDesignSystem_92f652.Select" label="Estado" options="{{ estados }}" value="{{ f3 }}" on-change="{{ set.f3 }}" hint-size="100%,68px"></x-import>
+            </div>
+            <sc-if value="{{ err.f3 }}"><div style="margin-top:8px;font:400 12px/1.4 var(--font-sans);color:var(--color-fg-danger)">{{ err.f3 }}</div></sc-if>
+          </sc-if>
+
+          <sc-if value="{{ isStep2 }}">
+            <div style="font:700 11px/1 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:var(--coral);margin-bottom:10px">{{ selName }}</div>
+            <h3 style="font:700 19px/1.4 var(--font-sans);color:var(--azul-marino);margin:0 0 22px">¿Cómo te contactamos?</h3>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px">
+              <x-import component-from-global-scope="AntaVidiDesignSystem_92f652.Input" label="Nombre completo" placeholder="Nombre y apellidos" value="{{ nombre }}" error="{{ err.nombre }}" on-change="{{ set.nombre }}" hint-size="100%,68px"></x-import>
+              <x-import component-from-global-scope="AntaVidiDesignSystem_92f652.Input" label="Correo electrónico" type="email" placeholder="nombre@correo.com" value="{{ correo }}" error="{{ err.correo }}" on-change="{{ set.correo }}" hint-size="100%,68px"></x-import>
+              <x-import component-from-global-scope="AntaVidiDesignSystem_92f652.Input" label="Teléfono" type="tel" placeholder="10 dígitos" value="{{ tel }}" error="{{ err.tel }}" on-change="{{ set.tel }}" hint-size="100%,68px"></x-import>
+            </div>
+            <div style="margin-top:24px">
+              <x-import component-from-global-scope="AntaVidiDesignSystem_92f652.Checkbox" label="Autorizo que un asesor de Antaŭvidi me contacte con una propuesta." checked="{{ ok }}" on-change="{{ toggleOk }}" hint-size="auto,20px"></x-import>
+              <sc-if value="{{ err.ok }}"><div style="margin-top:8px;font:400 12px/1.4 var(--font-sans);color:var(--color-fg-danger)">{{ err.ok }}</div></sc-if>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isStep3 }}">
+            <div style="max-width:520px">
+              <div style="font-family:var(--font-serif);font-size:40px;line-height:1;color:var(--coral);margin-bottom:18px">✓</div>
+              <h3 style="font-family:var(--font-serif);font-weight:400;font-size:clamp(26px,3vw,34px);line-height:1.2;color:var(--azul-marino);margin:0 0 14px">Recibimos tu solicitud, {{ nombre }}.</h3>
+              <p style="font:400 16px/1.65 var(--font-sans);color:var(--color-fg-muted);margin:0 0 26px">Un asesor revisa tu caso de <strong style="color:var(--azul-marino)">{{ selName }}</strong> y te escribe a {{ correo }} con una propuesta y el detalle de coberturas. Si prefieres teléfono, lo marcamos al {{ tel }}.</p>
+              <div style="border-top:1px solid var(--color-border-subtle);padding-top:22px;display:flex;flex-wrap:wrap;gap:12px">
+                <button type="button" onClick="{{ restart }}" style="font:700 13px/1 var(--font-sans);letter-spacing:0.06em;text-transform:uppercase;color:var(--azul-marino);background:transparent;border:1px solid var(--azul-marino);border-radius:var(--radius-sm);padding:15px 22px;cursor:pointer;transition:background 120ms" style-hover="background:var(--navy-50)">Cotizar otra línea</button>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ showNav }}">
+            <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;padding-top:26px;border-top:1px solid var(--color-border-subtle)">
+              <sc-if value="{{ canBack }}">
+                <button type="button" onClick="{{ back }}" style="font:700 13px/1 var(--font-sans);letter-spacing:0.06em;text-transform:uppercase;color:var(--azul-marino);background:transparent;border:1px solid var(--color-border-default);border-radius:var(--radius-sm);padding:15px 22px;cursor:pointer;transition:background 120ms" style-hover="background:var(--color-bg-subtle)">Atrás</button>
+              </sc-if>
+              <button type="button" onClick="{{ next }}" style="font:700 13px/1 var(--font-sans);letter-spacing:0.06em;text-transform:uppercase;color:#ffffff;background:var(--coral);border:none;border-radius:var(--radius-sm);padding:15px 26px;cursor:pointer;transition:background 120ms;margin-left:auto" style-hover="background:var(--coral-600)">{{ nextLabel }}</button>
+            </div>
+          </sc-if>
+
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ modeSimple }}">
+        <div style="padding:clamp(28px,4vw,48px)">
+          <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+            <h3 style="font:700 19px/1.4 var(--font-sans);color:var(--azul-marino);margin:0 0 22px">Déjanos tus datos y te contactamos.</h3>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px">
+              <x-import component-from-global-scope="AntaVidiDesignSystem_92f652.Select" label="Me interesa" options="{{ lineOptions }}" value="{{ lineKey }}" on-change="{{ set.line }}" hint-size="100%,68px"></x-import>
+              <x-import component-from-global-scope="AntaVidiDesignSystem_92f652.Input" label="Nombre completo" placeholder="Nombre y apellidos" value="{{ nombre }}" error="{{ err.nombre }}" on-change="{{ set.nombre }}" hint-size="100%,68px"></x-import>
+              <x-import component-from-global-scope="AntaVidiDesignSystem_92f652.Input" label="Correo electrónico" type="email" placeholder="nombre@correo.com" value="{{ correo }}" error="{{ err.correo }}" on-change="{{ set.correo }}" hint-size="100%,68px"></x-import>
+              <x-import component-from-global-scope="AntaVidiDesignSystem_92f652.Input" label="Teléfono" type="tel" placeholder="10 dígitos" value="{{ tel }}" error="{{ err.tel }}" on-change="{{ set.tel }}" hint-size="100%,68px"></x-import>
+            </div>
+            <div style="margin-top:26px;display:flex;flex-wrap:wrap;align-items:center;gap:20px">
+              <x-import component-from-global-scope="AntaVidiDesignSystem_92f652.Checkbox" label="Autorizo el contacto de un asesor." checked="{{ ok }}" on-change="{{ toggleOk }}" hint-size="auto,20px"></x-import>
+              <button type="button" onClick="{{ submitSimple }}" style="font:700 13px/1 var(--font-sans);letter-spacing:0.06em;text-transform:uppercase;color:#ffffff;background:var(--coral);border:none;border-radius:var(--radius-sm);padding:15px 26px;cursor:pointer;margin-left:auto" style-hover="background:var(--coral-600)">Enviar solicitud</button>
+            </div>
+            <sc-if value="{{ err.ok }}"><div style="margin-top:10px;font:400 12px/1.4 var(--font-sans);color:var(--color-fg-danger)">{{ err.ok }}</div></sc-if>
+          </sc-if>
+          <sc-if value="{{ isStep3 }}">
+            <div style="font-family:var(--font-serif);font-size:40px;line-height:1;color:var(--coral);margin-bottom:18px">✓</div>
+            <h3 style="font-family:var(--font-serif);font-weight:400;font-size:clamp(26px,3vw,34px);line-height:1.2;color:var(--azul-marino);margin:0 0 14px">Recibimos tu solicitud, {{ nombre }}.</h3>
+            <p style="font:400 16px/1.65 var(--font-sans);color:var(--color-fg-muted);margin:0">Te escribimos a {{ correo }} en el transcurso del día hábil.</p>
+          </sc-if>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <section id="agentes" data-rv="" style="background:var(--azul-marino);border-radius:28px;margin:0 clamp(12px,2vw,24px);padding:clamp(72px,9vw,124px) 0;animation:rv .7s cubic-bezier(0,0,.2,1) both;animation-timeline:view();animation-range:entry 0% entry 45%">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(40px,6vw,80px);align-items:start">
+      <div>
+        <div style="font:700 12px/1.4 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:var(--coral);margin-bottom:16px">Red de agentes</div>
+        <h2 style="font-family:var(--font-serif);font-weight:400;font-size:clamp(28px,3.6vw,46px);line-height:1.15;letter-spacing:-0.01em;color:#ffffff;margin:0 0 20px;max-width:20em">Trabaja con respaldo.</h2>
+        <p style="font:400 17px/1.65 var(--font-sans);color:rgba(255,255,255,0.78);margin:0 0 34px;max-width:32em">Si ya operas cartera propia o estás empezando, te damos estructura técnica, plataforma y acompañamiento comercial para colocar y conservar.</p>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:18px 22px"><div style="font:700 15px/1.4 var(--font-sans);color:#ffffff">Mesa técnica de suscripción</div><div style="font:400 14px/1.55 var(--font-sans);color:rgba(255,255,255,0.7);margin-top:4px">Apoyo para armar casos complejos y sostener la renovación.</div></div>
+          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:18px 22px"><div style="font:700 15px/1.4 var(--font-sans);color:#ffffff">Plataforma de cotización y emisión</div><div style="font:400 14px/1.55 var(--font-sans);color:rgba(255,255,255,0.7);margin-top:4px">Cotiza las cuatro líneas y da seguimiento a tu cartera en un mismo lugar.</div></div>
+          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:18px 22px"><div style="font:700 15px/1.4 var(--font-sans);color:#ffffff">Materiales de marca listos para usar</div><div style="font:400 14px/1.55 var(--font-sans);color:rgba(255,255,255,0.7);margin-top:4px">Presentaciones, piezas digitales y guiones de venta a tu nombre.</div></div>
+        </div>
+      </div>
+      <div style="background:#ffffff;border-radius:22px;padding:clamp(26px,3.5vw,40px)">
+        <sc-if value="{{ agNotSent }}" hint-placeholder-val="{{ true }}">
+          <h3 style="font:700 19px/1.4 var(--font-sans);color:var(--azul-marino);margin:0 0 8px">Recibe la información para agentes</h3>
+          <p style="font:400 15px/1.6 var(--font-sans);color:var(--color-fg-muted);margin:0 0 24px">Te mandamos el folleto con esquema de comisiones y requisitos por WhatsApp.</p>
+          <div style="display:flex;flex-direction:column;gap:18px">
+            <x-import component-from-global-scope="AntaVidiDesignSystem_92f652.Input" label="Nombre completo" placeholder="Nombre y apellidos" value="{{ ag.nombre }}" error="{{ agErr.nombre }}" on-change="{{ agSet.nombre }}" hint-size="100%,68px"></x-import>
+            <x-import component-from-global-scope="AntaVidiDesignSystem_92f652.Input" label="Teléfono celular" type="tel" placeholder="10 dígitos" value="{{ ag.celular }}" error="{{ agErr.celular }}" on-change="{{ agSet.celular }}" hint-size="100%,68px"></x-import>
+            <x-import component-from-global-scope="AntaVidiDesignSystem_92f652.Input" label="Ciudad" placeholder="Ciudad donde operas" value="{{ ag.ciudad }}" error="{{ agErr.ciudad }}" on-change="{{ agSet.ciudad }}" hint-size="100%,68px"></x-import>
+          </div>
+          <button type="button" onClick="{{ agSubmit }}" style="margin-top:26px;width:100%;font:700 13px/1 var(--font-sans);letter-spacing:0.06em;text-transform:uppercase;color:#ffffff;background:var(--azul-marino);border:none;border-radius:var(--radius-sm);padding:17px;cursor:pointer;transition:background 120ms" style-hover="background:var(--navy-800)">Descargar información</button>
+        </sc-if>
+        <sc-if value="{{ agSent }}">
+          <x-import component-from-global-scope="AntaVidiDesignSystem_92f652.Alert" tone="success" title="Folleto en camino" hint-size="100%,80px">Enviamos la información de la red de agentes al {{ ag.celular }}. Un coordinador regional te contacta para revisar tu perfil.</x-import>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+</main>
+</sc-if>
+
+<sc-if value="{{ isLine }}">
+<main data-screen-label="{{ line.name }}">
+
+  <section style="position:relative;background:{{ line.bg }};display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));margin:clamp(12px,2vw,24px);border-radius:28px;overflow:hidden">
+    <div style="padding:clamp(56px,7vw,104px) clamp(20px,4vw,56px);display:flex;flex-direction:column;justify-content:center;min-height:clamp(420px,54vh,600px)">
+      <div style="max-width:34em;width:100%">
+        <div style="font:700 12px/1.4 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:{{ line.eyebrow }};margin-bottom:20px">{{ line.tag }}</div>
+        <h1 style="font-family:var(--font-serif);font-weight:700;font-size:clamp(34px,4.6vw,62px);line-height:1.06;letter-spacing:-0.015em;color:{{ line.fg }};margin:0">{{ line.head }}</h1>
+        <p style="font:400 clamp(16px,1.4vw,19px)/1.65 var(--font-sans);color:{{ line.dim }};margin:22px 0 34px">{{ line.sub }}</p>
+        <button type="button" onClick="{{ quoteThisLine }}" style="align-self:flex-start;font:700 13px/1 var(--font-sans);letter-spacing:0.06em;text-transform:uppercase;color:{{ line.ctaFg }};background:{{ line.cta }};border:none;border-radius:var(--radius-sm);padding:17px 26px;cursor:pointer;transition:opacity 120ms" style-hover="opacity:0.86">Cotizar {{ line.name }}</button>
+      </div>
+    </div>
+    <div style="position:relative;min-height:clamp(380px,52vh,600px);overflow:hidden">
+      <div style="position:absolute;inset:0;background-image:url({{ line.photo }});background-size:cover;background-position:{{ line.pos }};transform:{{ line.flip }}"></div>
+      <div style="position:absolute;inset:0 52% 0 0;background:{{ line.wash }};padding:clamp(26px,3vw,44px);display:flex;flex-direction:column;justify-content:center">
+        <img src="assets/logomark-blanco.svg" alt="" style="position:absolute;top:clamp(26px,3vw,44px);left:clamp(26px,3vw,44px);width:clamp(34px,3.2vw,48px);height:auto">
+        <div style="font-family:var(--font-serif);font-weight:400;font-size:clamp(22px,2.3vw,38px);line-height:1.14;color:#ffffff;margin:0">{{ line.claim }}</div>
+        <div style="font:500 clamp(15px,1.25vw,18px)/1.55 var(--font-sans);color:#ffffff;margin-top:clamp(14px,1.6vw,22px)">{{ line.claimSub }}</div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(64px,8vw,110px) clamp(20px,4vw,56px)">
+    <div style="font:700 12px/1.4 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:var(--coral);margin-bottom:14px">Qué cubre</div>
+    <h2 style="font-family:var(--font-serif);font-weight:400;font-size:clamp(26px,3.2vw,42px);line-height:1.15;color:var(--azul-marino);margin:0 0 clamp(36px,4.5vw,56px);max-width:24em">Coberturas principales.</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+      <sc-for list="{{ covers }}" as="c" hint-placeholder-count="5">
+        <div style="border:1px solid var(--color-border-subtle);border-radius:18px;padding:26px 24px">
+          <div style="font:700 12px/1 var(--font-sans);letter-spacing:0.1em;color:var(--coral);margin-bottom:12px">{{ c.n }}</div>
+          <h3 style="font:700 18px/1.35 var(--font-sans);color:var(--azul-marino);margin:0 0 8px">{{ c.t }}</h3>
+          <p style="font:400 15px/1.6 var(--font-sans);color:var(--color-fg-muted);margin:0">{{ c.d }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="background:var(--arena);border-radius:28px;margin:clamp(12px,2vw,24px);padding:clamp(64px,8vw,110px) 0">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+      <div style="font:700 12px/1.4 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:var(--azul-marino);opacity:0.6;margin-bottom:14px">Cómo funciona</div>
+      <h2 style="font-family:var(--font-serif);font-weight:400;font-size:clamp(26px,3.2vw,42px);line-height:1.15;color:var(--azul-marino);margin:0 0 clamp(36px,4.5vw,56px);max-width:24em">Tres pasos, sin vueltas.</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(28px,4vw,56px)">
+        <div>
+          <div style="font-family:var(--font-serif);font-size:40px;line-height:1;color:var(--coral);margin-bottom:16px">01</div>
+          <h3 style="font:700 18px/1.35 var(--font-sans);color:var(--azul-marino);margin:0 0 10px">Cotizas</h3>
+          <p style="font:400 15px/1.6 var(--font-sans);color:var(--azul-marino);opacity:0.75;margin:0">Nos dices qué necesitas proteger. Comparamos opciones y te explicamos qué cambia entre una y otra.</p>
+        </div>
+        <div>
+          <div style="font-family:var(--font-serif);font-size:40px;line-height:1;color:var(--coral);margin-bottom:16px">02</div>
+          <h3 style="font:700 18px/1.35 var(--font-sans);color:var(--azul-marino);margin:0 0 10px">Contratas</h3>
+          <p style="font:400 15px/1.6 var(--font-sans);color:var(--azul-marino);opacity:0.75;margin:0">Emisión digital, con las condiciones generales en claro antes de firmar. Sin cláusulas escondidas.</p>
+        </div>
+        <div>
+          <div style="font-family:var(--font-serif);font-size:40px;line-height:1;color:var(--coral);margin-bottom:16px">03</div>
+          <h3 style="font:700 18px/1.35 var(--font-sans);color:var(--azul-marino);margin:0 0 10px">Te acompañamos</h3>
+          <p style="font:400 15px/1.6 var(--font-sans);color:var(--azul-marino);opacity:0.75;margin:0">El día del siniestro hablas con tu asesor, no con un conmutador. Seguimiento hasta el pago.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--azul-marino);border-radius:28px;margin:clamp(12px,2vw,24px);padding:clamp(56px,7vw,96px) 0">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4vw,56px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:28px">
+      <h2 style="font-family:var(--font-serif);font-weight:400;font-size:clamp(24px,2.8vw,38px);line-height:1.2;color:#ffffff;margin:0;max-width:20em">¿Listo para cotizar tu seguro de {{ line.name }}?</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:14px">
+        <button type="button" onClick="{{ quoteThisLine }}" style="font:700 13px/1 var(--font-sans);letter-spacing:0.06em;text-transform:uppercase;color:#ffffff;background:var(--coral);border:none;border-radius:var(--radius-sm);padding:17px 26px;cursor:pointer;transition:background 120ms" style-hover="background:var(--coral-600)">Solicitar cotización</button>
+        <button type="button" onClick="{{ goHome }}" style="font:700 13px/1 var(--font-sans);letter-spacing:0.06em;text-transform:uppercase;color:#ffffff;background:transparent;border:1px solid rgba(255,255,255,0.4);border-radius:var(--radius-sm);padding:17px 26px;cursor:pointer;transition:background 120ms" style-hover="background:rgba(255,255,255,0.08)">Ver todas las líneas</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+</sc-if>
+
+<div style="height:clamp(24px,4vw,48px);background:#ffffff"></div>
+
+<footer style="background:var(--navy-950);border-radius:32px 32px 0 0;padding:clamp(56px,7vw,88px) 0 32px">
+  <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(32px,4vw,56px);padding-bottom:clamp(40px,5vw,64px)">
+      <div>
+        <img src="assets/logo-blanco.svg" alt="Antaŭvidi" style="height:26px;width:auto;margin-bottom:14px">
+        <div style="font-family:var(--font-serif);font-size:18px;line-height:1.35;color:var(--azul-cielo);margin-bottom:16px">La tranquilidad de estar listo.</div>
+        <p style="font:400 14px/1.65 var(--font-sans);color:rgba(255,255,255,0.6);margin:0;max-width:24em">Prevenir, proteger, vivir tranquilo. Respaldo en seguros de vida, salud, auto y casa.</p>
+      </div>
+      <div>
+        <div style="font:700 11px/1 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:16px">Seguros</div>
+        <div style="display:flex;flex-direction:column;gap:11px">
+          <span onClick="{{ goVida }}" style="font:400 14px/1.4 var(--font-sans);color:rgba(255,255,255,0.82);cursor:pointer" style-hover="color:#ffffff">Vida</span>
+          <span onClick="{{ goGmm }}" style="font:400 14px/1.4 var(--font-sans);color:rgba(255,255,255,0.82);cursor:pointer" style-hover="color:#ffffff">Salud</span>
+          <span onClick="{{ goAuto }}" style="font:400 14px/1.4 var(--font-sans);color:rgba(255,255,255,0.82);cursor:pointer" style-hover="color:#ffffff">Auto</span>
+          <span onClick="{{ goCasa }}" style="font:400 14px/1.4 var(--font-sans);color:rgba(255,255,255,0.82);cursor:pointer" style-hover="color:#ffffff">Casa</span>
+        </div>
+      </div>
+      <div>
+        <div style="font:700 11px/1 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:16px">Agentes</div>
+        <div style="display:flex;flex-direction:column;gap:11px">
+          <span onClick="{{ scrollAgentes }}" style="font:400 14px/1.4 var(--font-sans);color:rgba(255,255,255,0.82);cursor:pointer" style-hover="color:#ffffff">Únete a la red</span>
+          <span onClick="{{ scrollAgentes }}" style="font:400 14px/1.4 var(--font-sans);color:rgba(255,255,255,0.82);cursor:pointer" style-hover="color:#ffffff">Materiales de marca</span>
+          <span onClick="{{ scrollQuote }}" style="font:400 14px/1.4 var(--font-sans);color:rgba(255,255,255,0.82);cursor:pointer" style-hover="color:#ffffff">Cotizador</span>
+        </div>
+      </div>
+      <div>
+        <div style="font:700 11px/1 var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:16px">Legal</div>
+        <div style="display:flex;flex-direction:column;gap:11px">
+          <span style="font:400 14px/1.4 var(--font-sans);color:rgba(255,255,255,0.55)">Aviso de privacidad</span>
+          <span style="font:400 14px/1.4 var(--font-sans);color:rgba(255,255,255,0.55)">Términos de uso</span>
+          <span style="font:400 14px/1.4 var(--font-sans);color:rgba(255,255,255,0.55)">Condiciones generales</span>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.12);padding-top:26px;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between">
+      <p style="font:400 12px/1.6 var(--font-sans);color:rgba(255,255,255,0.45);margin:0;max-width:58em">Las coberturas descritas en este sitio son informativas y están sujetas a las condiciones generales, exclusiones y deducibles de cada póliza. Los datos de contacto se publicarán antes de la puesta en marcha.</p>
+      <p style="font:400 12px/1.6 var(--font-sans);color:rgba(255,255,255,0.45);margin:0">© 2026 Antaŭvidi</p>
+    </div>
+  </div>
+</footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;heroTreatment&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;foto&quot;,&quot;solido&quot;],&quot;default&quot;:&quot;foto&quot;,&quot;tsType&quot;:&quot;'foto' | 'solido'&quot;,&quot;section&quot;:&quot;Portada&quot;},&quot;quoteMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;completo&quot;,&quot;simple&quot;],&quot;default&quot;:&quot;completo&quot;,&quot;tsType&quot;:&quot;'completo' | 'simple'&quot;,&quot;section&quot;:&quot;Cotizador&quot;},&quot;revealAnimations&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Movimiento&quot;}}">
+class Component extends DCLogic {
+  state = {
+    page: 'home', menu: false, vw: 1280,
+    step: 0, line: '', f1: '', f2: '', f3: '', nombre: '', correo: '', tel: '', ok: false, errors: {},
+    ag: { nombre: '', celular: '', ciudad: '' }, agErrors: {}, agSent: false
+  };
+
+  L = {
+    vida: {
+      key: 'vida', name: 'Vida', tag: 'Seguros de vida',
+      bg: 'var(--azul-marino)', fg: '#ffffff', dim: 'rgba(255,255,255,0.8)', eyebrow: 'var(--coral)', cta: 'var(--coral)', ctaFg: '#ffffff',
+      photo: 'assets/foto-vida.jpeg', pos: 'center 26%', wash: 'rgba(22,41,71,0.82)',
+      flip: 'none', claim: 'Los tuyos, siempre respaldados.', claimSub: 'Antaŭvidi Vida. Lo que construiste sigue de pie.',
+      head: 'Tu legado, en manos firmes.',
+      sub: 'El respaldo económico que sostiene a tu familia cuando tú ya no puedas hacerlo. Beneficiarios claros, trámite acompañado y sin letras chiquitas.',
+      l1: 'Edad del asegurado', p1: 'Ej. 42', l2: 'Ocupación', p2: 'Ej. Contador',
+      covers: [
+        { n: '01', t: 'Fallecimiento', d: 'Suma asegurada para los beneficiarios que tú designes, sin pasar por sucesión.' },
+        { n: '02', t: 'Invalidez total y permanente', d: 'Anticipo de la suma asegurada si una condición te impide seguir trabajando.' },
+        { n: '03', t: 'Enfermedades graves', d: 'Pago adelantado ante diagnósticos de alto impacto, para cubrir el tratamiento sin descapitalizarte.' },
+        { n: '04', t: 'Gastos funerarios', d: 'Cobertura de liberación rápida para los primeros gastos, sin esperar el trámite completo.' },
+        { n: '05', t: 'Beneficiarios múltiples', d: 'Reparto por porcentajes, actualizable cada vez que cambie tu familia.' }
+      ]
+    },
+    gmm: {
+      key: 'gmm', name: 'Salud', tag: 'Seguros de salud',
+      bg: 'var(--azul-cielo)', fg: 'var(--azul-marino)', dim: 'rgba(22,41,71,0.75)', eyebrow: 'var(--coral-700)', cta: 'var(--coral)', ctaFg: '#ffffff',
+      photo: 'assets/foto-1.jpeg', pos: 'center 20%', wash: 'rgba(22,41,71,0.80)',
+      flip: 'scaleX(-1)', claim: 'Estar protegido es vivir con confianza.', claimSub: 'Antaŭvidi Salud. Atención sin sobresaltos.',
+      head: 'Atención cuando más importa.',
+      sub: 'Hospitalización, cirugía y tratamientos de alto costo con red médica amplia, y un asesor que responde el mismo día.',
+      l1: 'Edad del asegurado', p1: 'Ej. 38', l2: '¿Cuántas personas incluyes?', p2: 'Ej. 3',
+      covers: [
+        { n: '01', t: 'Hospitalización', d: 'Habitación, insumos y servicios hospitalarios dentro de la red contratada.' },
+        { n: '02', t: 'Cirugías y honorarios', d: 'Intervención, equipo quirúrgico y honorarios médicos según el tabulador de tu plan.' },
+        { n: '03', t: 'Medicamentos y estudios', d: 'Estudios de diagnóstico y medicamentos derivados del padecimiento cubierto.' },
+        { n: '04', t: 'Maternidad', d: 'Cobertura de embarazo y parto una vez cumplido el periodo de espera.' },
+        { n: '05', t: 'Emergencia en el extranjero', d: 'Atención de urgencia fuera del país durante viajes temporales.' }
+      ]
+    },
+    auto: {
+      key: 'auto', name: 'Auto', tag: 'Seguros de auto',
+      bg: 'var(--coral)', fg: '#ffffff', dim: 'rgba(255,255,255,0.88)', eyebrow: 'var(--azul-cielo)', cta: 'var(--azul-marino)', ctaFg: '#ffffff',
+      photo: 'assets/foto-auto.jpeg', pos: 'center', wash: 'rgba(240,75,84,0.90)',
+      flip: 'none', claim: 'Tu camino, siempre protegido.', claimSub: 'Antaŭvidi Autos. Maneja tranquilo, nosotros te cuidamos.',
+      head: 'Cada kilómetro, cubierto.',
+      sub: 'Maneja tranquilo: asistencia vial en cualquier momento, cobertura amplia y un proceso de siniestro que no te quita el día.',
+      l1: 'Marca y modelo', p1: 'Ej. Mazda 3 2022', l2: 'Uso del vehículo', p2: 'Particular o comercial',
+      covers: [
+        { n: '01', t: 'Responsabilidad civil', d: 'Daños a personas y bienes de terceros, con defensa legal incluida.' },
+        { n: '02', t: 'Daños materiales', d: 'Reparación por colisión y volcadura en talleres autorizados.' },
+        { n: '03', t: 'Robo total', d: 'Indemnización por valor comercial al momento del siniestro.' },
+        { n: '04', t: 'Asistencia vial', d: 'Grúa, paso de corriente, cambio de llanta y auxilio en carretera.' },
+        { n: '05', t: 'Gastos médicos a ocupantes', d: 'Atención para conductor y acompañantes derivada del accidente.' }
+      ]
+    },
+    casa: {
+      key: 'casa', name: 'Casa', tag: 'Seguros de casa',
+      bg: 'var(--arena)', fg: 'var(--azul-marino)', dim: 'rgba(22,41,71,0.75)', eyebrow: 'var(--coral-700)', cta: 'var(--coral)', ctaFg: '#ffffff',
+      photo: 'assets/foto-2.jpeg', pos: '62% 72%', wash: 'rgba(22,41,71,0.78)',
+      flip: 'scaleX(-1)', claim: 'Dormir tranquilo, cada noche.', claimSub: 'Antaŭvidi Casa. Tu patrimonio, resguardado.',
+      head: 'Tu patrimonio, en calma.',
+      sub: 'Tu inmueble y lo que hay dentro, protegidos ante lo que no se puede prever. Peritaje ágil y trato directo con quien te vendió la póliza.',
+      l1: 'Tipo de inmueble', p1: 'Casa, departamento…', l2: 'Valor aproximado del inmueble', p2: 'Ej. 3,500,000',
+      covers: [
+        { n: '01', t: 'Incendio y explosión', d: 'Reconstrucción del inmueble y reposición del contenido afectado.' },
+        { n: '02', t: 'Fenómenos hidrometeorológicos', d: 'Daños por huracán, granizo e inundación según la zona del inmueble.' },
+        { n: '03', t: 'Sismo', d: 'Cobertura estructural con deducible aplicado sobre la suma asegurada.' },
+        { n: '04', t: 'Robo de contenidos', d: 'Reposición de bienes y equipo del hogar con violencia comprobada.' },
+        { n: '05', t: 'Responsabilidad civil familiar', d: 'Daños que tú o tu familia causen a terceros dentro o fuera del inmueble.' }
+      ]
+    }
+  };
+
+  estados = [
+    { value: '', label: 'Selecciona tu estado' },
+    'Chihuahua', 'Coahuila', 'Nuevo León', 'Sonora', 'Sinaloa', 'Durango', 'Tamaulipas', 'Baja California', 'Otro'
+  ];
+
+  componentDidMount() {
+    this.onResize = () => this.setState({ vw: window.innerWidth });
+    window.addEventListener('resize', this.onResize);
+    this.onResize();
+    this.applyRev();
+  }
+  componentDidUpdate() { this.applyRev(); }
+  componentWillUnmount() { window.removeEventListener('resize', this.onResize); }
+
+  applyRev() {
+    if (this.props.revealAnimations === false) {
+      document.querySelectorAll('[data-rv]').forEach((el) => {
+        el.style.animation = 'none';
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      });
+    }
+  }
+
+  go(page) {
+    this.setState({ page, menu: false }, () => window.scrollTo(0, 0));
+  }
+
+  scrollTo(id) {
+    requestAnimationFrame(() => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const from = window.scrollY;
+      const max = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      const to = Math.min(max, Math.max(0, el.getBoundingClientRect().top + from - 76));
+      const dur = 420, t0 = performance.now();
+      if (Math.abs(to - from) < 2) return;
+      const tick = (now) => {
+        const p = Math.min(1, (now - t0) / dur);
+        const e = 1 - Math.pow(1 - p, 3);
+        window.scrollTo(0, from + (to - from) * e);
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+  }
+
+  jump(id) {
+    if (this.state.page === 'home') { this.setState({ menu: false }); this.scrollTo(id); }
+    else this.setState({ page: 'home', menu: false }, () => { window.scrollTo(0, 0); this.scrollTo(id); });
+  }
+
+  pick(line) {
+    this.setState({ line, step: 1, errors: {}, done: false });
+  }
+
+  quoteLine(line) {
+    const jumping = this.state.page !== 'home';
+    this.setState({ page: 'home', menu: false, line, step: 1, errors: {} }, () => {
+      if (jumping) window.scrollTo(0, 0);
+      this.scrollTo('cotizador');
+    });
+  }
+
+  validate() {
+    const s = this.state, e = {};
+    if (s.step === 1) {
+      if (!s.f1.trim()) e.f1 = 'Este dato es necesario';
+      if (!s.f2.trim()) e.f2 = 'Este dato es necesario';
+      if (!s.f3) e.f3 = 'Selecciona tu estado';
+    }
+    if (s.step === 2) {
+      if (s.nombre.trim().length < 3) e.nombre = 'Escribe tu nombre completo';
+      if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(s.correo)) e.correo = 'Revisa tu correo';
+      if (s.tel.replace(/\D/g, '').length < 10) e.tel = 'Necesitamos 10 dígitos';
+      if (!s.ok) e.ok = 'Necesitamos tu autorización para contactarte';
+    }
+    return e;
+  }
+
+  next() {
+    const s = this.state;
+    if (s.step === 0) { if (!s.line) { this.setState({ errors: { line: 'Elige una línea' } }); return; } this.setState({ step: 1, errors: {} }); return; }
+    const e = this.validate();
+    if (Object.keys(e).length) { this.setState({ errors: e }); return; }
+    this.setState({ step: s.step + 1, errors: {} }, () => this.scrollTo('cotizador'));
+  }
+
+  back() { this.setState((s) => ({ step: Math.max(0, s.step - 1), errors: {} })); }
+
+  submitSimple() {
+    const s = this.state, e = {};
+    if (s.nombre.trim().length < 3) e.nombre = 'Escribe tu nombre completo';
+    if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(s.correo)) e.correo = 'Revisa tu correo';
+    if (s.tel.replace(/\D/g, '').length < 10) e.tel = 'Necesitamos 10 dígitos';
+    if (!s.ok) e.ok = 'Necesitamos tu autorización para contactarte';
+    if (Object.keys(e).length) { this.setState({ errors: e }); return; }
+    this.setState({ step: 3, errors: {} });
+  }
+
+  restart() {
+    this.setState({ step: 0, line: '', f1: '', f2: '', f3: '', nombre: '', correo: '', tel: '', ok: false, errors: {} }, () => this.scrollTo('cotizador'));
+  }
+
+  agSubmit() {
+    const a = this.state.ag, e = {};
+    if (a.nombre.trim().length < 3) e.nombre = 'Escribe tu nombre completo';
+    if (a.celular.replace(/\D/g, '').length < 10) e.celular = 'Necesitamos 10 dígitos';
+    if (!a.ciudad.trim()) e.ciudad = '¿Desde dónde operas?';
+    if (Object.keys(e).length) { this.setState({ agErrors: e }); return; }
+    this.setState({ agErrors: {}, agSent: true });
+  }
+
+  field(k) { return (ev) => this.setState({ [k]: ev.target.value }); }
+  agField(k) { return (ev) => this.setState((s) => ({ ag: { ...s.ag, [k]: ev.target.value } })); }
+
+  renderVals() {
+    const s = this.state;
+    const cur = this.L[s.page] || null;
+    const sel = this.L[s.line] || null;
+    const mode = this.props.quoteMode || 'completo';
+    const hero = this.props.heroTreatment || 'foto';
+    return {
+      isHome: s.page === 'home',
+      isLine: !!cur,
+      line: cur || {},
+      isGmm: s.page === 'gmm',
+      isCasa: s.page === 'casa',
+      covers: cur ? cur.covers : [],
+      isDesktop: s.vw >= 920,
+      isMobile: s.vw < 920,
+      menuOpen: s.menu,
+      heroFoto: hero === 'foto',
+      modeCompleto: mode === 'completo',
+      modeSimple: mode === 'simple',
+
+      goHome: () => this.go('home'),
+      goVida: () => this.go('vida'),
+      goGmm: () => this.go('gmm'),
+      goAuto: () => this.go('auto'),
+      goCasa: () => this.go('casa'),
+      toggleMenu: () => this.setState((p) => ({ menu: !p.menu })),
+      scrollQuote: () => this.jump('cotizador'),
+      scrollAgentes: () => this.jump('agentes'),
+      quoteThisLine: () => this.quoteLine(s.page),
+
+      stepLabels: ['Producto', 'Detalles', 'Contacto', 'Confirmación'],
+      step: s.step,
+      goStep: (i) => this.setState({ step: i, errors: {} }),
+      isStep0: s.step === 0,
+      isStep1: s.step === 1,
+      isStep2: s.step === 2,
+      isStep3: s.step === 3,
+      showNav: s.step < 3,
+      canBack: s.step > 0,
+      nextLabel: s.step === 2 ? 'Enviar solicitud' : 'Continuar',
+      notSent: s.step !== 3,
+      next: () => this.next(),
+      back: () => this.back(),
+      restart: () => this.restart(),
+      submitSimple: () => this.submitSimple(),
+      pick: { vida: () => this.pick('vida'), gmm: () => this.pick('gmm'), auto: () => this.pick('auto'), casa: () => this.pick('casa') },
+      sel: { vida: s.line === 'vida', gmm: s.line === 'gmm', auto: s.line === 'auto', casa: s.line === 'casa' },
+      selName: sel ? sel.name : 'tu seguro',
+      lineKey: s.line,
+      lineOptions: [{ value: '', label: 'Selecciona una línea' }, { value: 'vida', label: 'Seguro de vida' }, { value: 'gmm', label: 'Seguro de salud' }, { value: 'auto', label: 'Seguro de auto' }, { value: 'casa', label: 'Seguro de casa' }],
+      qLabel1: sel ? sel.l1 : 'Dato principal',
+      qPh1: sel ? sel.p1 : '',
+      qLabel2: sel ? sel.l2 : 'Dato secundario',
+      qPh2: sel ? sel.p2 : '',
+      estados: this.estados,
+      f1: s.f1, f2: s.f2, f3: s.f3, nombre: s.nombre, correo: s.correo, tel: s.tel, ok: s.ok,
+      err: s.errors,
+      set: {
+        f1: this.field('f1'), f2: this.field('f2'), f3: this.field('f3'),
+        nombre: this.field('nombre'), correo: this.field('correo'), tel: this.field('tel'),
+        line: (ev) => this.setState({ line: ev.target.value })
+      },
+      toggleOk: () => this.setState((p) => ({ ok: !p.ok })),
+
+      ag: s.ag,
+      agErr: s.agErrors,
+      agSent: s.agSent,
+      agNotSent: !s.agSent,
+      agSet: { nombre: this.agField('nombre'), celular: this.agField('celular'), ciudad: this.agField('ciudad') },
+      agSubmit: () => this.agSubmit()
+    };
+  }
+}
+</script>
+</body>
+</html>

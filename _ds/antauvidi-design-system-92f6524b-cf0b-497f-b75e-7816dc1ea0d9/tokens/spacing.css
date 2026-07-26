@@ -1,0 +1,60 @@
+:root {
+  /* Undocumented in source (print-manual, not a UI spec) — 4px-rhythm scale
+     sized to the brand's calm, generous-whitespace layouts. */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-32: 128px;
+
+  --container-max: 1200px;
+  --content-max: 720px;
+
+  /* ---- Control metrics — density-aware. Components size controls and rows
+     from these, never hard-coded heights. ---- */
+  --control-height-sm: 32px;
+  --control-height-md: 40px;
+  --control-height-lg: 48px;
+  --control-padding-x-sm: 12px;
+  --control-padding-x-md: 16px;
+  --control-padding-x-lg: 20px;
+  --table-row-height: 52px;
+  --table-cell-padding-y: 14px;
+  --table-cell-padding-x: 16px;
+  --list-item-padding-y: 12px;
+  --field-gap: var(--space-2);      /* label ↔ control ↔ help text */
+  --form-row-gap: var(--space-6);   /* between fields */
+
+  /* ---- Breakpoints — documentation values (CSS vars can't drive media
+     queries; use these in JS/container queries and keep media queries in
+     sync by hand): sm 640, md 768, lg 1024, xl 1280, 2xl 1536. ---- */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+/* ---- Compact density — ops/back-office surfaces (tables, records).
+   Apply data-density="compact" on <html>, <body>, or any subtree. ---- */
+[data-density="compact"] {
+  --control-height-sm: 28px;
+  --control-height-md: 32px;
+  --control-height-lg: 40px;
+  --control-padding-x-sm: 10px;
+  --control-padding-x-md: 12px;
+  --control-padding-x-lg: 16px;
+  --table-row-height: 38px;
+  --table-cell-padding-y: 8px;
+  --table-cell-padding-x: 12px;
+  --list-item-padding-y: 8px;
+  --form-row-gap: var(--space-4);
+}

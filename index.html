@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Antaŭvidi — La tranquilidad de estar listo.</title>
+<meta name="description" content="Antaŭvidi respalda a agentes de seguros y a sus clientes con cuatro líneas de protección: vida, salud, auto y casa. Criterio técnico y trato personal en cada trámite.">
+<meta name="theme-color" content="#162947">
+<link rel="icon" href="assets/logomark-rojo.svg" type="image/svg+xml">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_MX">
+<meta property="og:site_name" content="Antaŭvidi">
+<meta property="og:title" content="Antaŭvidi — La tranquilidad de estar listo.">
+<meta property="og:description" content="Respaldo en seguros de vida, salud, auto y casa. Prevenir, proteger, vivir tranquilo.">
+
+<!-- Design-system tokens, imported verbatim from the Claude Design project.
+     `tokens/fonts.css` is replaced by `styles/fonts.css` — see the note there. -->
+<link rel="stylesheet" href="styles/fonts.css">
+<link rel="stylesheet" href="_ds/antauvidi-design-system-92f6524b-cf0b-497f-b75e-7816dc1ea0d9/tokens/colors.css">
+<link rel="stylesheet" href="_ds/antauvidi-design-system-92f6524b-cf0b-497f-b75e-7816dc1ea0d9/tokens/typography.css">
+<link rel="stylesheet" href="_ds/antauvidi-design-system-92f6524b-cf0b-497f-b75e-7816dc1ea0d9/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/antauvidi-design-system-92f6524b-cf0b-497f-b75e-7816dc1ea0d9/tokens/effects.css">
+<link rel="stylesheet" href="_ds/antauvidi-design-system-92f6524b-cf0b-497f-b75e-7816dc1ea0d9/tokens/dataviz.css">
+<link rel="stylesheet" href="_ds/antauvidi-design-system-92f6524b-cf0b-497f-b75e-7816dc1ea0d9/tokens/base.css">
+
+<link rel="stylesheet" href="styles/components.css">
+<link rel="stylesheet" href="styles/site.css">
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Ir al contenido</a>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="#" aria-label="Antaŭvidi — inicio">
+      <img class="site-header__logo" src="assets/logo-blanco.svg" alt="Antaŭvidi" width="111" height="25">
+    </a>
+    <nav class="site-nav" aria-label="Principal">
+      <a href="#vida">Vida</a>
+      <a href="#salud">Salud</a>
+      <a href="#auto">Auto</a>
+      <a href="#casa">Casa</a>
+      <a class="site-nav__divider" href="#agentes">Agentes</a>
+    </nav>
+    <button class="site-header__burger" type="button" id="burger" aria-label="Menú" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu u-hidden" id="mobile-menu">
+  <a href="#vida">Vida</a>
+  <a href="#salud">Salud</a>
+  <a href="#auto">Auto</a>
+  <a href="#casa">Casa</a>
+  <a href="#agentes">Agentes</a>
+  <a class="btn btn--coral" href="#cotizador">Solicitar cotización</a>
+</div>
+
+<main id="contenido">
+
+<!-- ==================================================================== HOME -->
+<div id="page-home">
+
+  <section class="hero">
+    <img class="hero__photo" id="hero-photo" src="assets/foto-2.jpeg" alt="">
+    <div class="hero__wash"></div>
+    <div class="hero__inner">
+      <p class="eyebrow hero__eyebrow">Respaldo para agentes y clientes</p>
+      <h1 class="hero__title">La tranquilidad de estar listo.</h1>
+      <p class="hero__lede">Antaŭvidi respalda a agentes de seguros y a sus clientes con cuatro líneas de protección, criterio técnico y trato personal en cada trámite.</p>
+      <div class="hero__actions">
+        <a class="btn btn--coral" href="#cotizador">Solicitar cotización</a>
+        <a class="btn btn--sky" href="#agentes">Quiero ser agente</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" data-rv aria-labelledby="cartera-title">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Cartera integral</p>
+        <h2 class="section-title" id="cartera-title">Cuatro líneas, un mismo respaldo.</h2>
+      </div>
+      <p class="section-head__aside">Cada línea opera con su propio equipo técnico. Un solo asesor te acompaña en todas.</p>
+    </div>
+    <div class="line-grid">
+      <a class="line-card" href="#vida" style="--line-color:var(--azul-marino)">
+        <span class="line-card__rule" aria-hidden="true"></span>
+        <h3 class="line-card__title">Vida</h3>
+        <p class="line-card__text">El respaldo económico que sostiene a tu familia cuando tú ya no puedas hacerlo.</p>
+        <span class="line-card__cta">Ver cobertura</span>
+      </a>
+      <a class="line-card" href="#salud" style="--line-color:var(--azul-cielo)">
+        <span class="line-card__rule" aria-hidden="true"></span>
+        <h3 class="line-card__title">Salud</h3>
+        <p class="line-card__text">Hospitalización, cirugía y tratamientos de alto costo, con red médica amplia.</p>
+        <span class="line-card__cta">Ver cobertura</span>
+      </a>
+      <a class="line-card" href="#auto" style="--line-color:var(--coral)">
+        <span class="line-card__rule" aria-hidden="true"></span>
+        <h3 class="line-card__title">Auto</h3>
+        <p class="line-card__text">Asistencia vial, cobertura amplia y un proceso de siniestro que no te quita el día.</p>
+        <span class="line-card__cta">Ver cobertura</span>
+      </a>
+      <a class="line-card" href="#casa" style="--line-color:var(--arena-500)">
+        <span class="line-card__rule" aria-hidden="true"></span>
+        <h3 class="line-card__title">Casa</h3>
+        <p class="line-card__text">Tu inmueble y su contenido, protegidos ante lo que no se puede prever.</p>
+        <span class="line-card__cta">Ver cobertura</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="band band--arena" data-rv aria-labelledby="pilares-title">
+    <div class="shell">
+      <p class="eyebrow eyebrow--onArena">Por qué Antaŭvidi</p>
+      <h2 class="section-title band__title" id="pilares-title">Tres cosas que no negociamos.</h2>
+      <div class="pillars">
+        <div class="pillar">
+          <div class="pillar__num" aria-hidden="true">01</div>
+          <h3 class="pillar__title">Trato personal</h3>
+          <p class="pillar__text">Un asesor con nombre, no un conmutador. La misma persona te cotiza, te contrata y te acompaña el día del siniestro.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar__num" aria-hidden="true">02</div>
+          <h3 class="pillar__title">Respaldo</h3>
+          <p class="pillar__text">Años de oficio en el sector financiero detrás de cada póliza, con criterio técnico para elegir la cobertura correcta y no la más fácil de vender.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar__num" aria-hidden="true">03</div>
+          <h3 class="pillar__title">Tecnología</h3>
+          <p class="pillar__text">Cotización, emisión y seguimiento en una sola plataforma. Menos papel, menos espera y expediente disponible cuando lo necesitas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---- Cotizador ---------------------------------------------------- -->
+  <section class="section" id="cotizador" data-rv aria-labelledby="cotizador-title">
+    <div class="quote__intro">
+      <p class="eyebrow">Cotización</p>
+      <h2 class="section-title" id="cotizador-title">Dinos qué quieres proteger.</h2>
+      <p>Cuatro pasos breves. Un asesor revisa tu caso y te contacta con una propuesta a medida.</p>
+    </div>
+
+    <div class="quote__card">
+
+      <!-- quoteMode: completo -->
+      <div id="quote-completo">
+        <div class="quote__steps">
+          <ol class="ds-stepper" id="stepper">
+            <li class="is-current" aria-current="step">
+              <button class="ds-stepper__item" type="button" data-step="0" tabindex="-1">
+                <span class="ds-stepper__dot" aria-hidden="true"><span class="ds-stepper__dot-num" data-num="1"></span></span>
+                <span class="ds-stepper__label">Producto</span>
+              </button>
+              <span class="ds-stepper__bar" aria-hidden="true"></span>
+            </li>
+            <li>
+              <button class="ds-stepper__item" type="button" data-step="1" tabindex="-1">
+                <span class="ds-stepper__dot" aria-hidden="true"><span class="ds-stepper__dot-num" data-num="2"></span></span>
+                <span class="ds-stepper__label">Detalles</span>
+              </button>
+              <span class="ds-stepper__bar" aria-hidden="true"></span>
+            </li>
+            <li>
+              <button class="ds-stepper__item" type="button" data-step="2" tabindex="-1">
+                <span class="ds-stepper__dot" aria-hidden="true"><span class="ds-stepper__dot-num" data-num="3"></span></span>
+                <span class="ds-stepper__label">Contacto</span>
+              </button>
+              <span class="ds-stepper__bar" aria-hidden="true"></span>
+            </li>
+            <li>
+              <button class="ds-stepper__item" type="button" data-step="3" tabindex="-1">
+                <span class="ds-stepper__dot" aria-hidden="true"><span class="ds-stepper__dot-num" data-num="4"></span></span>
+                <span class="ds-stepper__label">Confirmación</span>
+              </button>
+            </li>
+          </ol>
+        </div>
+
+        <form class="quote__body" id="quote-form" novalidate>
+
+          <!-- Step 0 — producto -->
+          <div class="quote__step" data-step="0">
+            <h3 class="quote__legend">¿Qué quieres asegurar?</h3>
+            <div class="pick-grid">
+              <button class="pick" type="button" data-line="vida" aria-pressed="false" style="--line-color:var(--azul-marino)">
+                <span class="pick__rule" aria-hidden="true"></span>
+                <span class="pick__name">Vida</span>
+                <span class="pick__hint">Para tu familia</span>
+                <span class="pick__flag">Seleccionado</span>
+              </button>
+              <button class="pick" type="button" data-line="gmm" aria-pressed="false" style="--line-color:var(--azul-cielo)">
+                <span class="pick__rule" aria-hidden="true"></span>
+                <span class="pick__name">Salud</span>
+                <span class="pick__hint">Hospital y cirugía</span>
+                <span class="pick__flag">Seleccionado</span>
+              </button>
+              <button class="pick" type="button" data-line="auto" aria-pressed="false" style="--line-color:var(--coral)">
+                <span class="pick__rule" aria-hidden="true"></span>
+                <span class="pick__name">Auto</span>
+                <span class="pick__hint">Tu vehículo</span>
+                <span class="pick__flag">Seleccionado</span>
+              </button>
+              <button class="pick" type="button" data-line="casa" aria-pressed="false" style="--line-color:var(--arena-500)">
+                <span class="pick__rule" aria-hidden="true"></span>
+                <span class="pick__name">Casa</span>
+                <span class="pick__hint">Inmueble y contenido</span>
+                <span class="pick__flag">Seleccionado</span>
+              </button>
+            </div>
+            <p class="form-error" id="err-line" role="alert"></p>
+          </div>
+
+          <!-- Step 1 — detalles -->
+          <div class="quote__step u-hidden" data-step="1">
+            <p class="quote__selname" data-bind="selName"></p>
+            <h3 class="quote__legend">Cuéntanos lo básico.</h3>
+            <div class="field-grid">
+              <label class="ds-field" data-field="f1">
+                <span class="ds-field__label" data-bind="qLabel1"></span>
+                <input class="ds-input" type="text" name="f1" autocomplete="off">
+                <span class="ds-field__msg"></span>
+              </label>
+              <label class="ds-field" data-field="f2">
+                <span class="ds-field__label" data-bind="qLabel2"></span>
+                <input class="ds-input" type="text" name="f2" autocomplete="off">
+                <span class="ds-field__msg"></span>
+              </label>
+              <label class="ds-field" data-field="f3">
+                <span class="ds-field__label">Estado</span>
+                <span class="ds-select">
+                  <select name="f3" data-options="estados"></select>
+                </span>
+                <span class="ds-field__msg"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Step 2 — contacto -->
+          <div class="quote__step u-hidden" data-step="2">
+            <p class="quote__selname" data-bind="selName"></p>
+            <h3 class="quote__legend">¿Cómo te contactamos?</h3>
+            <div class="field-grid">
+              <label class="ds-field" data-field="nombre">
+                <span class="ds-field__label">Nombre completo</span>
+                <input class="ds-input" type="text" name="nombre" placeholder="Nombre y apellidos" autocomplete="name">
+                <span class="ds-field__msg"></span>
+              </label>
+              <label class="ds-field" data-field="correo">
+                <span class="ds-field__label">Correo electrónico</span>
+                <input class="ds-input" type="email" name="correo" placeholder="nombre@correo.com" autocomplete="email">
+                <span class="ds-field__msg"></span>
+              </label>
+              <label class="ds-field" data-field="tel">
+                <span class="ds-field__label">Teléfono</span>
+                <input class="ds-input" type="tel" name="tel" placeholder="10 dígitos" autocomplete="tel">
+                <span class="ds-field__msg"></span>
+              </label>
+            </div>
+            <div class="quote__consent">
+              <label class="ds-checkbox">
+                <input type="checkbox" name="ok">
+                <span class="ds-checkbox__box" aria-hidden="true">
+                  <svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                Autorizo que un asesor de Antaŭvidi me contacte con una propuesta.
+              </label>
+              <p class="form-error" data-error="ok" role="alert"></p>
+            </div>
+          </div>
+
+          <!-- Step 3 — confirmación -->
+          <div class="quote__step quote__done u-hidden" data-step="3">
+            <div class="quote__tick" aria-hidden="true">✓</div>
+            <h3>Recibimos tu solicitud, <span data-bind="nombre"></span>.</h3>
+            <p>Un asesor revisa tu caso de <strong data-bind="selName"></strong> y te escribe a <span data-bind="correo"></span> con una propuesta y el detalle de coberturas. Si prefieres teléfono, lo marcamos al <span data-bind="tel"></span>.</p>
+            <div class="quote__restart">
+              <button class="btn btn--sm btn--outline-strong" type="button" id="quote-restart">Cotizar otra línea</button>
+            </div>
+          </div>
+
+          <div class="quote__nav" id="quote-nav">
+            <button class="btn btn--sm btn--outline u-hidden" type="button" id="quote-back">Atrás</button>
+            <button class="btn btn--sm btn--coral" type="submit" id="quote-next">Continuar</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- quoteMode: simple -->
+      <div id="quote-simple" class="u-hidden">
+        <form class="quote__body" id="quote-simple-form" novalidate>
+          <div id="quote-simple-fields">
+            <h3 class="quote__legend">Déjanos tus datos y te contactamos.</h3>
+            <div class="quote-simple__fields">
+              <label class="ds-field">
+                <span class="ds-field__label">Me interesa</span>
+                <span class="ds-select">
+                  <select name="line" data-options="lineOptions"></select>
+                </span>
+                <span class="ds-field__msg"></span>
+              </label>
+              <label class="ds-field" data-field="nombre">
+                <span class="ds-field__label">Nombre completo</span>
+                <input class="ds-input" type="text" name="nombre" placeholder="Nombre y apellidos" autocomplete="name">
+                <span class="ds-field__msg"></span>
+              </label>
+              <label class="ds-field" data-field="correo">
+                <span class="ds-field__label">Correo electrónico</span>
+                <input class="ds-input" type="email" name="correo" placeholder="nombre@correo.com" autocomplete="email">
+                <span class="ds-field__msg"></span>
+              </label>
+              <label class="ds-field" data-field="tel">
+                <span class="ds-field__label">Teléfono</span>
+                <input class="ds-input" type="tel" name="tel" placeholder="10 dígitos" autocomplete="tel">
+                <span class="ds-field__msg"></span>
+              </label>
+            </div>
+            <div class="quote-simple__submit">
+              <label class="ds-checkbox">
+                <input type="checkbox" name="ok">
+                <span class="ds-checkbox__box" aria-hidden="true">
+                  <svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                Autorizo el contacto de un asesor.
+              </label>
+              <button class="btn btn--sm btn--coral" type="submit">Enviar solicitud</button>
+            </div>
+            <p class="form-error" data-error="ok" role="alert"></p>
+          </div>
+          <div class="quote__done u-hidden" id="quote-simple-done">
+            <div class="quote__tick" aria-hidden="true">✓</div>
+            <h3>Recibimos tu solicitud, <span data-bind="nombre"></span>.</h3>
+            <p>Te escribimos a <span data-bind="correo"></span> en el transcurso del día hábil.</p>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ---- Agentes ------------------------------------------------------ -->
+  <section class="band band--navy" id="agentes" data-rv aria-labelledby="agentes-title">
+    <div class="shell agentes">
+      <div>
+        <p class="eyebrow">Red de agentes</p>
+        <h2 class="agentes__title" id="agentes-title">Trabaja con respaldo.</h2>
+        <p class="agentes__lede">Si ya operas cartera propia o estás empezando, te damos estructura técnica, plataforma y acompañamiento comercial para colocar y conservar.</p>
+        <dl class="agentes__perks">
+          <div class="agentes__perk">
+            <dt>Mesa técnica de suscripción</dt>
+            <dd>Apoyo para armar casos complejos y sostener la renovación.</dd>
+          </div>
+          <div class="agentes__perk">
+            <dt>Plataforma de cotización y emisión</dt>
+            <dd>Cotiza las cuatro líneas y da seguimiento a tu cartera en un mismo lugar.</dd>
+          </div>
+          <div class="agentes__perk">
+            <dt>Materiales de marca listos para usar</dt>
+            <dd>Presentaciones, piezas digitales y guiones de venta a tu nombre.</dd>
+          </div>
+        </dl>
+      </div>
+      <div class="agentes__panel">
+        <form id="agentes-form" novalidate>
+          <div id="agentes-fields">
+            <h3>Recibe la información para agentes</h3>
+            <p>Te mandamos el folleto con esquema de comisiones y requisitos por WhatsApp.</p>
+            <div class="agentes__fields">
+              <label class="ds-field" data-field="nombre">
+                <span class="ds-field__label">Nombre completo</span>
+                <input class="ds-input" type="text" name="nombre" placeholder="Nombre y apellidos" autocomplete="name">
+                <span class="ds-field__msg"></span>
+              </label>
+              <label class="ds-field" data-field="celular">
+                <span class="ds-field__label">Teléfono celular</span>
+                <input class="ds-input" type="tel" name="celular" placeholder="10 dígitos" autocomplete="tel">
+                <span class="ds-field__msg"></span>
+              </label>
+              <label class="ds-field" data-field="ciudad">
+                <span class="ds-field__label">Ciudad</span>
+                <input class="ds-input" type="text" name="ciudad" placeholder="Ciudad donde operas" autocomplete="address-level2">
+                <span class="ds-field__msg"></span>
+              </label>
+            </div>
+            <button class="btn btn--md btn--navy btn--block" type="submit">Descargar información</button>
+          </div>
+          <div class="ds-alert ds-alert--success u-hidden" id="agentes-done" role="status">
+            <div class="ds-alert__body">
+              <div class="ds-alert__title">Folleto en camino</div>
+              <div class="ds-alert__text">Enviamos la información de la red de agentes al <span data-bind="celular"></span>. Un coordinador regional te contacta para revisar tu perfil.</div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============================================================ LINE PAGE -->
+<div id="page-line" class="u-hidden">
+
+  <section class="line-hero" id="line-hero">
+    <div class="line-hero__copy">
+      <div>
+        <p class="line-hero__eyebrow" data-bind="tag"></p>
+        <h1 class="line-hero__title" data-bind="head"></h1>
+        <p class="line-hero__lede" data-bind="sub"></p>
+        <button class="btn btn--md line-hero__cta" type="button" id="line-cta"></button>
+      </div>
+    </div>
+    <div class="line-hero__media">
+      <div class="line-hero__photo" id="line-photo"></div>
+      <div class="line-hero__wash">
+        <img class="line-hero__mark" src="assets/logomark-blanco.svg" alt="" width="48" height="48">
+        <p class="line-hero__claim" data-bind="claim"></p>
+        <p class="line-hero__claim-sub" data-bind="claimSub"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight" aria-labelledby="covers-title">
+    <p class="eyebrow">Qué cubre</p>
+    <h2 class="section-title section-title--sm covers-title" id="covers-title">Coberturas principales.</h2>
+    <div class="covers" id="covers"></div>
+  </section>
+
+  <section class="band band--arena band--tight" aria-labelledby="comofunciona-title">
+    <div class="shell">
+      <p class="eyebrow eyebrow--onArena">Cómo funciona</p>
+      <h2 class="section-title section-title--sm covers-title" id="comofunciona-title">Tres pasos, sin vueltas.</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step__num" aria-hidden="true">01</div>
+          <h3 class="step__title">Cotizas</h3>
+          <p class="step__text">Nos dices qué necesitas proteger. Comparamos opciones y te explicamos qué cambia entre una y otra.</p>
+        </div>
+        <div class="step">
+          <div class="step__num" aria-hidden="true">02</div>
+          <h3 class="step__title">Contratas</h3>
+          <p class="step__text">Emisión digital, con las condiciones generales en claro antes de firmar. Sin cláusulas escondidas.</p>
+        </div>
+        <div class="step">
+          <div class="step__num" aria-hidden="true">03</div>
+          <h3 class="step__title">Te acompañamos</h3>
+          <p class="step__text">El día del siniestro hablas con tu asesor, no con un conmutador. Seguimiento hasta el pago.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--navy band--closer">
+    <div class="shell closer">
+      <h2 data-bind="closer"></h2>
+      <div class="closer__actions">
+        <button class="btn btn--md btn--coral" type="button" id="line-cta-2">Solicitar cotización</button>
+        <a class="btn btn--md btn--ghost-light" href="#">Ver todas las líneas</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<div class="footer-gap"></div>
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="site-footer__cols">
+      <div>
+        <a href="#" aria-label="Antaŭvidi — inicio">
+          <img class="site-footer__logo" src="assets/logo-blanco.svg" alt="Antaŭvidi" width="115" height="26">
+        </a>
+        <p class="site-footer__claim">La tranquilidad de estar listo.</p>
+        <p class="site-footer__about">Prevenir, proteger, vivir tranquilo. Respaldo en seguros de vida, salud, auto y casa.</p>
+      </div>
+      <div>
+        <h2 class="site-footer__heading">Seguros</h2>
+        <ul class="site-footer__list">
+          <li><a href="#vida">Vida</a></li>
+          <li><a href="#salud">Salud</a></li>
+          <li><a href="#auto">Auto</a></li>
+          <li><a href="#casa">Casa</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="site-footer__heading">Agentes</h2>
+        <ul class="site-footer__list">
+          <li><a href="#agentes">Únete a la red</a></li>
+          <li><a href="#agentes">Materiales de marca</a></li>
+          <li><a href="#cotizador">Cotizador</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="site-footer__heading">Legal</h2>
+        <ul class="site-footer__list">
+          <li><span>Aviso de privacidad</span></li>
+          <li><span>Términos de uso</span></li>
+          <li><span>Condiciones generales</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__base">
+      <p>Las coberturas descritas en este sitio son informativas y están sujetas a las condiciones generales, exclusiones y deducibles de cada póliza. Los datos de contacto se publicarán antes de la puesta en marcha.</p>
+      <p>© 2026 Antaŭvidi</p>
+    </div>
+  </div>
+</footer>
+
+<script src="scripts/site.js"></script>
+</body>
+</html>

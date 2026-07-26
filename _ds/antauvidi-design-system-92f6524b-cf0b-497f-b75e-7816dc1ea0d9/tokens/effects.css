@@ -1,0 +1,80 @@
+:root {
+  /* Corner radii — the logotype/logomark are sharp-edged; radius is used
+     sparingly, mainly for click/touch affordance on small controls. */
+  --radius-sm: 4px;   /* tags, badges, inputs, buttons */
+  --radius-md: 8px;   /* cards, dialogs */
+  --radius-lg: 14px;  /* large photo/hero panels */
+  --radius-pill: 999px; /* capsule chips — seen throughout the social kit as URL/CTA chips */
+
+  /* ---- Elevation — flat, print-first identity; stays barely-there.
+     Levels are roles, not decoration: 0 flush, 100 raised card, 200 sticky,
+     300 dropdown/popover, 400 modal/drawer, 500 toast. ---- */
+  --elevation-0: none;
+  --elevation-100: 0 1px 2px rgba(22, 41, 71, 0.06);
+  --elevation-200: 0 2px 8px rgba(22, 41, 71, 0.07);
+  --elevation-300: 0 4px 16px rgba(22, 41, 71, 0.08);
+  --elevation-400: 0 12px 32px rgba(22, 41, 71, 0.12);
+  --elevation-500: 0 16px 48px rgba(22, 41, 71, 0.16);
+
+  /* Legacy shadow names — @deprecated → --elevation-* */
+  --shadow-sm: var(--elevation-100);
+  --shadow-md: var(--elevation-300);
+  --shadow-lg: var(--elevation-400);
+  --shadow-focus: 0 0 0 3px rgba(240, 75, 84, 0.35); /* @deprecated → use --focus-ring via outline */
+
+  /* ---- Focus ring — single system-wide treatment (WCAG 2.4.7 / 2.4.13).
+     Use: outline: var(--focus-ring); outline-offset: var(--focus-ring-offset).
+     Inset variant for elements flush against container edges. ---- */
+  --focus-ring-width: 2px; /* @kind other */
+  --focus-ring-color: var(--color-border-focus, var(--coral)); /* @kind color */
+  --focus-ring: var(--focus-ring-width) solid var(--focus-ring-color); /* @kind other */
+  --focus-ring-offset: 2px; /* @kind other */
+  --focus-ring-offset-inset: -2px; /* @kind other */
+
+  /* ---- Z-index scale — never hand-pick values between steps ---- */
+  --z-base: 0; /* @kind other */
+  --z-raised: 1;        /* @kind other */
+  --z-dropdown: 1000;   /* @kind other */
+  --z-sticky: 1100;     /* @kind other */
+  --z-banner: 1200;     /* @kind other */
+  --z-overlay: 1300;    /* @kind other */
+  --z-modal: 1400;      /* @kind other */
+  --z-popover: 1500;    /* @kind other */
+  --z-toast: 1700;      /* @kind other */
+  --z-tooltip: 1800;    /* @kind other */
+
+  /* ---- Motion — brand reads calm/low-motion. Short fades, small moves. ----
+     enter = decelerate (starts fast, settles); exit = accelerate (leaves fast). */
+  --duration-instant: 0ms;    /* @kind other */
+  --duration-fast: 120ms;     /* @kind other */
+  --duration-base: 200ms;     /* @kind other */
+  --duration-moderate: 280ms; /* @kind other */
+  --duration-slow: 320ms;     /* @kind other */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);      /* @kind other */
+  --ease-enter: cubic-bezier(0, 0, 0.2, 1);         /* @kind other */
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);          /* @kind other */
+  --ease-linear: linear;                            /* @kind other */
+
+  /* ---- Border widths ---- */
+  --border-width-sm: 1px;    /* default hairlines */
+  --border-width-md: 1.5px;  /* input borders needing presence */
+  --border-width-lg: 2px;    /* selected states, strong emphasis */
+
+  /* ---- Opacity steps ---- */
+  --opacity-disabled: 0.45; /* @kind other */
+  --opacity-overlay: 0.60;   /* @kind other */
+
+  /* Photo duotone overlay — the brand's recurring "navy wash over photography" treatment */
+  --duotone-navy: linear-gradient(180deg, rgba(22,41,71,0.72), rgba(22,41,71,0.86)); /* @kind other */
+  --duotone-coral: linear-gradient(160deg, rgba(240,75,84,0.85), rgba(240,75,84,0.55)); /* @kind other */
+}
+
+/* Dark theme — shadows read weaker on dark; raised surfaces rely on
+   lighter background steps + subtle borders instead. */
+[data-theme="dark"] {
+  --elevation-100: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --elevation-200: 0 2px 8px rgba(0, 0, 0, 0.40);
+  --elevation-300: 0 4px 16px rgba(0, 0, 0, 0.45);
+  --elevation-400: 0 12px 32px rgba(0, 0, 0, 0.55);
+  --elevation-500: 0 16px 48px rgba(0, 0, 0, 0.60);
+}
