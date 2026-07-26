@@ -24,10 +24,12 @@
       bg: 'var(--azul-marino)', fg: '#ffffff', dim: 'rgba(255,255,255,0.8)',
       eyebrow: 'var(--coral)', cta: 'var(--coral)', ctaFg: '#ffffff',
       // Different photograph from the one the design assumed (elderly couple on a
-      // beach, per the client), reframed so the subjects clear the wash panel —
-      // so the design's 'center 26%' no longer applies.
+      // beach, per the client), so 'center 26%' no longer applies. Mirrored like
+      // Salud and Casa so the couple faces into the layout rather than out of it;
+      // the file is cropped with them at 30% so the flip lands them at 70% — clear
+      // of the wash panel, matching where the subject sits on every other line.
       photo: 'assets/foto-vida.jpeg', pos: 'center', wash: 'rgba(22,41,71,0.82)',
-      flip: 'none',
+      flip: 'scaleX(-1)',
       claim: 'Los tuyos, siempre respaldados.',
       claimSub: 'Antaŭvidi Vida. Lo que construiste sigue de pie.',
       head: 'Tu legado, en manos firmes.',
