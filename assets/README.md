@@ -3,7 +3,7 @@
 Imported from the Claude Design project **Sitio Antauvidi**
 (`036df62d-ef72-40bd-8347-2fc61156dd87`).
 
-## Present
+## Logos
 
 | File | Use |
 | --- | --- |
@@ -13,47 +13,53 @@ Imported from the Claude Design project **Sitio Antauvidi**
 | `logomark-blanco.svg` | Reversed logomark on the product-line hero wash |
 | `logomark-rojo.svg` | Coral logomark — used as the site favicon |
 
-## Missing — photography
+## Photography
 
-Four photographs the design references could **not** be pulled out of the
-design project: every one of them is larger than the 256 KiB per-file read cap
-of the design-project API, so they come back truncated rather than whole. They
-are not in this repository, and the site is built to degrade cleanly until
-they are added.
+The design references four photographs. **Two are here, two are still
+missing.** None of them could be read out of the design project directly:
+every one exceeds the 256 KiB per-file cap of the design-project API and comes
+back truncated, and the formats rule out salvaging a low-resolution version —
+the JPEGs are baseline rather than progressive, and the PNGs are not
+Adam7-interlaced, so a truncated read returns only the top scanlines. Decoding
+what did arrive yielded 0.7%, 2.3%, 7.3% and 17.7% of each frame respectively.
 
-| File | Where it is used | What it actually is | Recoverable |
+### Present
+
+Supplied directly by the client and verified against the recoverable top
+scanlines of the originals before being committed (mean per-pixel difference
+18.8 and 4.4 out of 255 — same photographs, downscaled).
+
+| File | Where it is used | Here | In the design project |
 | --- | --- | --- | --- |
-| `foto-2.jpeg` | Home hero (full-bleed, `object-position: center 38%`) and the Casa line hero (`62% 72%`, mirrored) | baseline JPEG, 6492 × 4130 | 96 of 4130 rows (2.3%) |
-| `foto-1.jpeg` | Salud line hero (`center 20%`, mirrored) | baseline JPEG, 5614 × 3335 | 24 of 3335 rows (0.7%) |
-| `foto-vida.jpeg` | Vida line hero (`center 26%`) | **PNG** despite the extension, 1400 × 1177, non-interlaced | 86 of 1177 rows (7.3%) |
-| `foto-auto.jpeg` | Auto line hero (`center`) | **PNG** despite the extension, 551 × 913, non-interlaced | 162 of 913 rows (17.7%) |
+| `foto-2.jpeg` | Home hero (full-bleed, `object-position: center 38%`) and the Casa line hero (`62% 72%`, mirrored) | JPEG 2000 × 1272, 410 KB | baseline JPEG 6492 × 4130 |
+| `foto-1.jpeg` | Salud line hero (`center 20%`, mirrored) | JPEG 2000 × 1188, 233 KB | baseline JPEG 5614 × 3335 |
 
-Nothing salvageable: the JPEGs are baseline rather than progressive and the PNGs
-are not Adam7-interlaced, so a truncated read yields only the top few percent of
-scanlines, not a low-resolution version of the whole frame. Measured, not
-estimated — the percentages above come from decoding what did arrive.
+2000 px wide is sized for a full-bleed hero; the originals are far larger than
+a web page needs.
 
-Two notes for whoever supplies the originals:
+### Still missing
 
-- **Keep the filenames exactly as they are**, `.jpeg` extension included, even
-  on the two that are really PNGs. The page references those literal names and
-  browsers sniff the actual format, so it works either way.
-- `foto-auto.jpeg` is only 551 × 913 in the source project. It is used as a
-  full-bleed `background-size: cover` panel, so it will look soft on a desktop
-  viewport. Worth replacing with a larger frame if one exists.
-- `foto-2.jpeg` at 6492 × 4130 is far larger than a web hero needs. Resizing to
-  roughly 2400 px wide before committing keeps the page fast.
+| File | Where it is used | What the original is |
+| --- | --- | --- |
+| `foto-vida.jpeg` | Vida line hero (`center 26%`) | **PNG** despite the extension, 1400 × 1177 |
+| `foto-auto.jpeg` | Auto line hero (`center`) | **PNG** despite the extension, 551 × 913 |
 
-Drop the real files in beside this README under exactly these names and they
-are picked up with no code change:
+Drop them in beside this README under exactly those names — `.jpeg` extension
+included, even though both are really PNGs. The page references those literal
+names and browsers sniff the actual format, so it works either way. No code
+change is needed: each line hero probes its photograph and applies it if it
+loads.
 
-- The home hero `<img>` loads `assets/foto-2.jpeg`. While it is missing, the
-  page switches itself to the design's own `heroTreatment: solido` variant — a
-  flat Azul Marino field — instead of showing a broken image.
-- Each line hero probes its photograph before applying it as a background. If
-  the file is absent, the media column stays a solid brand field in that
-  line's colour, under the same duotone wash.
+Until then the Vida and Auto heroes carry `.is-nophoto`, which spreads the
+duotone wash across the whole media column so the panel reads as the manual's
+solid-colour blocking rather than a failed image.
 
-Do not commit resized or re-encoded stand-ins under these names — the manual
-calls for the licensed originals, warm-neutral and naturally lit, with the
+Note on `foto-auto.jpeg`: at 551 × 913 the original is small for the
+full-bleed `background-size: cover` panel it fills, and will look soft on a
+desktop viewport. Worth sourcing a larger frame.
+
+## Rules
+
+Do not commit stand-in imagery under these names. The manual calls for the
+licensed originals — warm-neutral, naturally lit, real-world scenes — with the
 navy or coral duotone applied in CSS rather than baked into the file.

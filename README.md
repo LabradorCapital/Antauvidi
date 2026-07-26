@@ -116,11 +116,12 @@ sync if the bundle changes.
 
 ## Known gaps
 
-- **Photography.** The four brand photographs are missing; each exceeds the
-  256 KiB per-file read cap of the design-project API and can only be
-  retrieved truncated. See [`assets/README.md`](assets/README.md) for the
-  exact filenames and where each one is used. Both hero treatments degrade to
-  brand-correct solid fields until the files are added.
+- **Photography.** Two of the four brand photographs are in — `foto-2.jpeg`
+  (home hero and Casa) and `foto-1.jpeg` (Salud), supplied by the client and
+  verified against the originals. `foto-vida.jpeg` and `foto-auto.jpeg` are
+  still missing; neither could be read out of the design project, which caps
+  file reads at 256 KiB. The Vida and Auto heroes degrade to brand-correct
+  solid fields until they are added. See [`assets/README.md`](assets/README.md).
 - **Fonts.** Same cap, same outcome for the Tinos `.ttf` binaries, so Tinos
   and Karla are both loaded from Google Fonts. See
   [`_ds/antauvidi-…/assets/fonts/README.md`](_ds/antauvidi-design-system-92f6524b-cf0b-497f-b75e-7816dc1ea0d9/assets/fonts/README.md).
