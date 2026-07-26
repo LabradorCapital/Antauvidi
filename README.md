@@ -20,9 +20,30 @@ python3 -m http.server 8000
 Opening `index.html` straight off the filesystem works too, though the Google
 Fonts request needs network access either way.
 
+## Deploying to GitHub Pages
+
+**`.nojekyll` at the repository root is load-bearing — do not delete it.**
+
+GitHub Pages runs Jekyll over the branch it serves, and Jekyll drops every
+top-level path beginning with an underscore from the published output. That
+silently deletes the whole of `_ds/`, so all six design-token stylesheets
+404 and every `var(--color-*)`, `var(--font-*)` and `var(--space-*)` in the
+page resolves to nothing: white text on a white background, no brand colours,
+no type. The page looks blank rather than broken, which is what makes it hard
+to diagnose. The empty `.nojekyll` file turns Jekyll off and the files are
+served as-is.
+
+Any project imported from Claude Design carries the same `_ds/` folder, so it
+hits this the same way. Add `.nojekyll` first thing.
+
+Pages must be set to **Deploy from a branch** on the branch that actually
+holds this code. If it is set to *GitHub Actions* instead, a deploy workflow
+is needed and `.nojekyll` alone will not help.
+
 ## Layout
 
 ```
+.nojekyll                  disables Jekyll on GitHub Pages (see above)
 index.html                 the site
 styles/fonts.css           Tinos + Karla (see "Fonts" below)
 styles/components.css      design-system components as dependency-free CSS
