@@ -483,6 +483,13 @@ html[data-hero="solido"] .hero::after {
   padding-block: clamp(72px, 9vw, 124px);
 }
 
+/* The design gives home bands `margin: 0 clamp(12px,2vw,24px)` but product-line
+   bands `margin: clamp(12px,2vw,24px)` — all four sides. That vertical margin
+   is what separates "Cómo funciona" from the closing CTA with a white gap;
+   without it the arena and navy bands butt straight up against each other.
+   Adjacent margins collapse, so the gap is one step, not two. */
+#page-line .band { margin-block: clamp(12px, 2vw, 24px); }
+
 .band--arena { background: var(--arena); }
 .band--navy { background: var(--azul-marino); }
 .band--tight { padding-block: clamp(64px, 8vw, 110px); }
